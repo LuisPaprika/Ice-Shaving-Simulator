@@ -5,29 +5,47 @@ public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private Transform endPosition;
     [SerializeField] private Transform waitPosition;
-    [SerializeField] GameObject customerPrefab;
-    [SerializeField] float spawnInitial;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float waitingTime;
+    [SerializeField] private float spawnInitial;
+    [SerializeField] private GameObject customerPrefab;
+    [SerializeField] private ShaveIcedAsset shaveIcedAsset;
     private bool allowSpawning;
 
     void Awake()
     {
-        allowSpawning = true;
-        StartSpawning();
+        OpeningSign.onOpenStore += StartSpawning;
+        OpeningSign.onCloseStore += StopSpawning;
     }
+
     private void StartSpawning()
     {
         allowSpawning = true;
-        StartCoroutine(spawnCustomer());
+        StartCoroutine(spawnCustomer(Random.Range(2, 5)));
     }
 
-    private IEnumerator spawnCustomer()
+    private void StopSpawning()
     {
+        allowSpawning = false;
+    }
+
+    private IEnumerator spawnCustomer(float startDelay)
+    {
+        yield return new WaitForSeconds(startDelay);
+
         while (allowSpawning)
         {
             GameObject customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
             Customer script = customer.GetComponent<Customer>();
-            script.Init(waitPosition, endPosition);
+            script.Init(shaveIcedAsset.getRandomFlavor(), waitPosition, endPosition, waitingTime, moveSpeed);
             yield return new WaitForSeconds(spawnInitial);
         }
     }
+
+    void OnDestroy()
+    {
+        OpeningSign.onOpenStore -= StopSpawning;
+        OpeningSign.onCloseStore -= StopSpawning;
+    }
+
 }

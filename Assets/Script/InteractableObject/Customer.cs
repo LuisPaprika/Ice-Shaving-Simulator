@@ -1,39 +1,45 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    private float moveSpeed;
+    private float waitingTime;
     private Transform endPosition;
     private Transform waitPosition;
-    [SerializeField] private ShaveIcedAsset shaveIcedAsset;
+    private ShavedIceFlavor req;
     [SerializeField] private Transform requestSlot;
-    private ShavedIceFlavor request;
+    [SerializeField] private ShaveIcedAsset shaveIcedAsset;
+    [SerializeField] private ParticleSystem correctParticle;
+    [SerializeField] private ParticleSystem wrongParticle;
+
 
     public void deliver(ShavedIce recievedItem)
     {
-        if (recievedItem.flavor == request)
+        if (recievedItem.flavor == req)
         {
-            Debug.Log("Thanks");
+            Instantiate(correctParticle, transform.position, Quaternion.identity);
+            StartCoroutine(exiting(endPosition.position, transform));
         }
         else
         {
-            Debug.Log("No");
+            Instantiate(wrongParticle, transform.position, Quaternion.identity);
+            StartCoroutine(exiting(endPosition.position, transform));
         }
-        StartCoroutine(moveToDestroy(transform.position, endPosition.position, transform));
     }
 
-    public void Init(Transform wPosition, Transform ePosition)
+    public void Init(ShavedIceFlavor request, Transform waitPoint, Transform endPoint, float waitTime, float speed)
     {
-        request = shaveIcedAsset.getRandomFlavor();
-        waitPosition = wPosition;
-        endPosition = ePosition;
+        waitPosition = waitPoint;
+        endPosition = endPoint;
+        moveSpeed = speed;
+        waitingTime = waitTime;
+        req = request;
 
-        StartCoroutine(moveToWait(transform.position, waitPosition.position, transform));
+        StartCoroutine(goToQueue(waitPosition.position, endPoint.position, transform));
     }
 
-    private IEnumerator moveToWait(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator goToQueue(Vector3 targetPostion, Vector3 destroyPosition, Transform obj)
     {
         while (Vector3.Distance(transform.position, targetPostion) != 0f)
         {
@@ -42,18 +48,35 @@ public class Customer : MonoBehaviour
         }
         obj.position = targetPostion;
 
-        GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(request), requestSlot.position, Quaternion.identity, requestSlot);
+        GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(req), requestSlot.position, Quaternion.identity, requestSlot);
         requestDisplay.GetComponent<Collider>().enabled = false;
+
+        StartCoroutine(waiting(waitingTime, destroyPosition));
     }
 
-    private IEnumerator moveToDestroy(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator waiting(float time, Vector3 position)
     {
+        yield return new WaitForSeconds(time);
+        StartCoroutine(exiting(position, transform));
+    }
+
+    private IEnumerator exiting(Vector3 targetPostion, Transform obj)
+    {
+        disableCustomer();
+
         while (Vector3.Distance(transform.position, targetPostion) > 0.01f)
         {
             obj.position = Vector3.MoveTowards(transform.position, targetPostion, moveSpeed * Time.deltaTime);
             yield return null;
         }
+
         obj.position = targetPostion;
         Destroy(transform.gameObject);
+    }
+
+    private void disableCustomer()
+    {
+        transform.GetComponent<Collider>().enabled = false;
+        Destroy(transform.GetChild(0).gameObject);
     }
 }

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b47a1adb22a2e428628b175409eed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  shaveIcedAsset: {fileID: 16407852376787033, guid: 79c18f5a1c4348d488446beed00b4fe1, type: 3}
   requestSlot: {fileID: 5192554155058023885}
+  shaveIcedAsset: {fileID: 16407852376787033, guid: 79c18f5a1c4348d488446beed00b4fe1, type: 3}
+  correctParticle: {fileID: 335863904914962115, guid: fa71983926334894fab8d7c2e63f7181, type: 3}
+  wrongParticle: {fileID: 335863904914962115, guid: 6843759288eb76e4c9682e96ba934e51, type: 3}

@@ -13,7 +13,7 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
     [field: SerializeField] public Transform cupSlot { get; private set; }
     [field: SerializeField] public Transform iceSlot { get; private set; }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform transform, PlayerMovement player)
     {
         shaveIce();
     }
@@ -36,7 +36,7 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
         }
     }
 
-    public void refillIce()
+    public void RefillIce()
     {
         currentIce = 5;
     }

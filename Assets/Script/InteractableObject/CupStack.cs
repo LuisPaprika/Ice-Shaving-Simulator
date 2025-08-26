@@ -14,7 +14,7 @@ public class CupStack : MonoBehaviour, IInteractable
         onHovered?.Invoke(interactPrompt);
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform objectPickupPoint, PlayerMovement player)
     {
         pickupCup(objectPickupPoint);
     }

@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 public class InteractPrompt : MonoBehaviour
 {
     private TMP_Text prompt;
-    private Player player;
+    private PlayerMovement player;
     void Awake()
     {
-        player = FindFirstObjectByType<Player>();
+        player = FindFirstObjectByType<PlayerMovement>();
 
         prompt = gameObject.GetComponent<TMP_Text>();
 

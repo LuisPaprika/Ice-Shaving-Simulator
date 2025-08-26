@@ -7,23 +7,38 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable
     [SerializeField] private string interactPrompt;
     public static event Action<string> onHovered;
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform transform, PlayerMovement player)
     {
         
     }
 
     public void putInMachine(GameObject targetMachine)
     {
-        IceShavingMachine iceShavingMachine = targetMachine.GetComponent<IceShavingMachine>();
-        if (iceShavingMachine.iceSlot.childCount == 0)
+        if (targetMachine.TryGetComponent<IceShavingMachine>(out IceShavingMachine iceShavingMachine))
         {
-            iceShavingMachine.refillIce();
+            if (iceShavingMachine.iceSlot.childCount == 0)
+            {
+                iceShavingMachine.RefillIce();
 
-            transform.rotation = Quaternion.identity;
-            StartCoroutine(lerpObject(transform.position, iceShavingMachine.iceSlot.transform.position, transform));
-            transform.SetParent(iceShavingMachine.iceSlot.transform);
+                transform.rotation = Quaternion.identity;
+                StartCoroutine(lerpObject(transform.position, iceShavingMachine.iceSlot.transform.position, transform));
+                transform.SetParent(iceShavingMachine.iceSlot.transform);
 
-            transform.GetComponent<Collider>().enabled = false;
+                transform.GetComponent<Collider>().enabled = false;
+            }
+        }
+        else if (targetMachine.TryGetComponent<ShavingStand>(out ShavingStand shavingStand))
+        {
+            if (shavingStand.iceSlot.childCount == 0)
+            {
+                shavingStand.RefillIce();
+
+                transform.rotation = Quaternion.identity;
+                StartCoroutine(lerpObject(transform.position, shavingStand.iceSlot.transform.position, transform));
+                transform.SetParent(shavingStand.iceSlot.transform);
+
+                transform.GetComponent<Collider>().enabled = false;
+            }
         }
 
     }

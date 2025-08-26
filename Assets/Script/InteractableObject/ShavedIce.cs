@@ -40,7 +40,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
         }
     }
 
-    public void give(GameObject targetPerson)
+    public void Give(GameObject targetPerson)
     {
         targetPerson.GetComponent<Customer>().deliver(this);
         StartCoroutine(giveObject(transform.position, targetPerson.transform.position, transform));
@@ -57,7 +57,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
         onHovered?.Invoke(interactPrompt);
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform objectPickupPoint, PlayerMovement player)
     {
 
     }

@@ -13,7 +13,7 @@ public class IceStorage : MonoBehaviour, IInteractable
         onHovered?.Invoke(interactPrompt);
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform objectPickupPoint, PlayerMovement player)
     {
         getIce(objectPickupPoint);
     }

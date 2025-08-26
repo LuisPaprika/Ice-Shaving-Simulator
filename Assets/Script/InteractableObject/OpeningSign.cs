@@ -15,7 +15,7 @@ public class OpeningSign : MonoBehaviour, IInteractable
 
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform objectPickupPoint, PlayerMovement player)
     {
         playFlipAnimation();
     }
@@ -26,7 +26,7 @@ public class OpeningSign : MonoBehaviour, IInteractable
         if (isOpen)
         {
             flipAnimator.SetTrigger("Open");
-            StartCoroutine(delayOpenInvoke(5f));
+            StartCoroutine(delayOpenInvoke(2f));
         }
         else
         {

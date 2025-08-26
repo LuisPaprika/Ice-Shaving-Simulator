@@ -14,17 +14,29 @@ public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 
     public void putInMachine(GameObject targetMachine)
     {
-        IceShavingMachine iceShavingMachine = targetMachine.GetComponent<IceShavingMachine>();
-        if (iceShavingMachine.cupSlot.childCount == 0)
+        if (targetMachine.TryGetComponent<IceShavingMachine>(out IceShavingMachine iceShavingMachine))
         {
-            transform.rotation = Quaternion.identity;
-            StartCoroutine(lerpObject(transform.position, iceShavingMachine.cupSlot.transform.position, transform));
-            transform.SetParent(iceShavingMachine.cupSlot.transform);
+            if (iceShavingMachine.cupSlot.childCount == 0)
+            {
+                transform.rotation = Quaternion.identity;
+                StartCoroutine(lerpObject(transform.position, iceShavingMachine.cupSlot.transform.position, transform));
+                transform.SetParent(iceShavingMachine.cupSlot.transform);
+            }
         }
+        else if (targetMachine.TryGetComponent<ShavingStand>(out ShavingStand shavingStand))
+        {
+            if (shavingStand.cupSlot.childCount == 0)
+            {
+                transform.rotation = Quaternion.identity;
+                StartCoroutine(lerpObject(transform.position, shavingStand.cupSlot.transform.position, transform));
+                transform.SetParent(shavingStand.cupSlot.transform);
+            }
+        }
+
 
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform transform, PlayerMovement player)
     {
 
     }

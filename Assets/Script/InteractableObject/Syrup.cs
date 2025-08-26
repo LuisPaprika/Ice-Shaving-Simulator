@@ -9,7 +9,7 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
     private bool isPicked;
     public static event Action<string> onHovered;
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform transform, PlayerMovement player)
     {
 
     }

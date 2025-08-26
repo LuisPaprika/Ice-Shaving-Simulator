@@ -8,7 +8,7 @@ public class TrashCan : MonoBehaviour, IInteractable
 
     }
 
-    public void Interact(Transform objectPickupPoint)
+    public void Interact(Transform objectPickupPoint, PlayerMovement player)
     {
 
     }

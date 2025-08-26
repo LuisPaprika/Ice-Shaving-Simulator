@@ -7,13 +7,13 @@ public class PlayerInteract : MonoBehaviour
 {
     [field: SerializeField] public float interactDistance { get; private set; }
     [SerializeField] Transform objectPickupPoint;
-    private Player player;
+    private PlayerMovement player;
     private Transform cameraTransform;
     void Awake()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
 
-        player = FindFirstObjectByType<Player>();
+        player = FindFirstObjectByType<PlayerMovement>();
 
         player.InputActions.Player.Attack.performed += InteractHandle;
     }
@@ -31,7 +31,7 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
                 {
-                    interactable.Interact(objectPickupPoint);
+                    interactable.Interact(objectPickupPoint, player);
                 }
 
             }
@@ -55,17 +55,25 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent<Customer>(out Customer customer) && objectPickupPoint.GetChild(0).TryGetComponent<ShavedIce>(out ShavedIce shavedIce1))
                 {
-                    shavedIce1.give(hitInfo.transform.gameObject);
+                    shavedIce1.Give(hitInfo.transform.gameObject);
                 }
 
-                else if (hitInfo.transform.TryGetComponent<IceShavingMachine>(out IceShavingMachine iceShavingMachine) && objectPickupPoint.GetChild(0).TryGetComponent<EmptyCup>(out EmptyCup emptyCup))
+                else if (objectPickupPoint.GetChild(0).TryGetComponent<EmptyCup>(out EmptyCup emptyCup))
                 {
-                    emptyCup.putInMachine(hitInfo.transform.gameObject);
+                    if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
+                        hitInfo.transform.GetComponent<ShavingStand>())
+                    {
+                        emptyCup.putInMachine(hitInfo.transform.gameObject);
+                    }
                 }
-
-                else if (hitInfo.transform.TryGetComponent<IceShavingMachine>(out IceShavingMachine iceShavingMachine1) && objectPickupPoint.GetChild(0).TryGetComponent<IceBlock>(out IceBlock iceBlock))
+                
+                else if (objectPickupPoint.GetChild(0).TryGetComponent<IceBlock>(out IceBlock iceBlock))
                 {
-                    iceBlock.putInMachine(hitInfo.transform.gameObject);
+                    if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
+                        hitInfo.transform.GetComponent<ShavingStand>())
+                    {
+                        iceBlock.putInMachine(hitInfo.transform.gameObject);
+                    }
                 }
 
                 else if (hitInfo.transform.TryGetComponent<TrashCan>(out TrashCan trashCan))

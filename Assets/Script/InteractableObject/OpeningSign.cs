@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OpeningSign : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Animator flipAnimator;
     private bool isOpen = false;
     public static event Action onOpenStore;
     public static event Action onCloseStore;
@@ -15,36 +17,40 @@ public class OpeningSign : MonoBehaviour, IInteractable
 
     public void Interact(Transform objectPickupPoint)
     {
-        flipSign(objectPickupPoint);
+        playFlipAnimation();
     }
 
-    private void flipSign(Transform objectPickupPoint)
+    private void playFlipAnimation()
     {
         isOpen = !isOpen;
         if (isOpen)
         {
-            Quaternion targetRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z);
-            StartCoroutine(rotate(transform.rotation, targetRotation, transform));
-            //onOpenStore?.Invoke();
+            flipAnimator.SetTrigger("Open");
+            StartCoroutine(delayOpenInvoke(5f));
         }
         else
         {
-            Quaternion targetRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y - 180, transform.rotation.z);
-            StartCoroutine(rotate(transform.rotation, targetRotation, transform));
-            //onCloseStore?.Invoke();
+            flipAnimator.SetTrigger("Close");
+            onCloseStore?.Invoke();
         }
     }
 
-    private IEnumerator rotate(Quaternion startRotation, Quaternion endRotation, Transform obj)
+    private IEnumerator delayOpenInvoke(float duration)
     {
-        float duration = 0.1f;
         float currentTime = 0f;
         while (currentTime < duration)
         {
-            obj.rotation = Quaternion.Lerp(obj.rotation, endRotation, currentTime / duration);
+            if (!isOpen)
+            {
+                yield break;
+            }
             currentTime += Time.deltaTime;
+
             yield return null;
         }
-        obj.rotation = endRotation;
+        Debug.Log("Start Spawning");
+        onOpenStore?.Invoke();
     }
+
+    
 }

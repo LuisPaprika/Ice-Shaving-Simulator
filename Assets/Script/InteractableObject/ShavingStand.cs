@@ -25,8 +25,7 @@ public class ShavingStand : MonoBehaviour, IInteractable
     {
         if (cupSlot.childCount > 0 && currentIce > 0)
         {
-            
-            Debug.Log("Start Mode");
+            player.GetComponent<PlayerMovement>().enabled = false;
         }
     }
 }

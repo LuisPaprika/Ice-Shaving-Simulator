@@ -7,13 +7,11 @@ public class PlayerInteract : MonoBehaviour
 {
     [field: SerializeField] public float interactDistance { get; private set; }
     [SerializeField] Transform objectPickupPoint;
-    private PlayerMovement player;
+    [SerializeField] PlayerMovement player;
     private Transform cameraTransform;
     void Awake()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
-
-        player = FindFirstObjectByType<PlayerMovement>();
 
         player.InputActions.Player.Attack.performed += InteractHandle;
     }

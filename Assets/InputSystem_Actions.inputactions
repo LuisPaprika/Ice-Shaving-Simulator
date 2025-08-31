@@ -990,6 +990,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Shaving",
+            "id": "4c7dce84-b6ce-449f-bb6f-c63eb79955f3",
+            "actions": [
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "7a797b3d-1c8d-4be1-b6f2-338419f72996",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "69ff77a4-957e-45c8-9812-dcb85066e65b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

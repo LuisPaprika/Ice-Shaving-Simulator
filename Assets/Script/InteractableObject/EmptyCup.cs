@@ -25,11 +25,11 @@ public class EmptyCup : MonoBehaviour, IPickable, IInteractable
         }
         else if (targetMachine.TryGetComponent<ShavingStand>(out ShavingStand shavingStand))
         {
-            if (shavingStand.cupSlot.childCount == 0)
+            if (shavingStand.CupSlot.childCount == 0)
             {
                 transform.rotation = Quaternion.identity;
-                StartCoroutine(lerpObject(transform.position, shavingStand.cupSlot.transform.position, transform));
-                transform.SetParent(shavingStand.cupSlot.transform);
+                StartCoroutine(lerpObject(transform.position, shavingStand.CupSlot.transform.position, transform));
+                transform.SetParent(shavingStand.CupSlot.transform);
             }
         }
 

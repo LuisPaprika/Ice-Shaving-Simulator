@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [field: SerializeField] public float interactDistance { get; private set; }
+    [field: SerializeField] public float InteractDistance { get; private set; }
     [SerializeField] Transform objectPickupPoint;
     [SerializeField] PlayerMovement player;
     private Transform cameraTransform;
@@ -18,7 +18,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void InteractHandle(InputAction.CallbackContext context)
     {
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, interactDistance))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, InteractDistance))
         {
             if (objectPickupPoint.transform.childCount == 0) //Empty Hand
             {

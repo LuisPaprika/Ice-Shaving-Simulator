@@ -606,17 +606,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d02feefa0e6dd41af01a7e36471779, type: 3}
---- !u!114 &1175489967 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5902598441538652510, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
-  m_PrefabInstance: {fileID: 1342390280976724374}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b8257f46b758146947ebeeb285bd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1261727470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,8 +716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d8c027d7a9a6d478f03198ff96f1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <cupSlot>k__BackingField: {fileID: 113985545}
-  <iceSlot>k__BackingField: {fileID: 434158487}
+  cameraPosition: {fileID: 1715265351}
+  <CupSlot>k__BackingField: {fileID: 113985545}
+  <IceSlot>k__BackingField: {fileID: 434158487}
 --- !u!23 &1280542979
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -797,6 +787,7 @@ Transform:
   m_Children:
   - {fileID: 434158487}
   - {fileID: 113985545}
+  - {fileID: 1715265351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1587977642
@@ -964,6 +955,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1715265350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715265351}
+  m_Layer: 0
+  m_Name: CameraSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715265351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715265350}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 12.600001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1280542981}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
 --- !u!1 &1770551631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,14 +2540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1005047723631033568, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7665980512329860674, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1175489967}
+      propertyPath: <InteractDistance>k__BackingField
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9145684372968616049, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

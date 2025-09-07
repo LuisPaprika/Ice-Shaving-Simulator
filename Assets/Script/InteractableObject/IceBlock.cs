@@ -29,13 +29,13 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable
         }
         else if (targetMachine.TryGetComponent<ShavingStand>(out ShavingStand shavingStand))
         {
-            if (shavingStand.iceSlot.childCount == 0)
+            if (shavingStand.IceSlot.childCount == 0)
             {
                 shavingStand.RefillIce();
 
                 transform.rotation = Quaternion.identity;
-                StartCoroutine(lerpObject(transform.position, shavingStand.iceSlot.transform.position, transform));
-                transform.SetParent(shavingStand.iceSlot.transform);
+                StartCoroutine(lerpObject(transform.position, shavingStand.IceSlot.transform.position, transform));
+                transform.SetParent(shavingStand.IceSlot.transform);
 
                 transform.GetComponent<Collider>().enabled = false;
             }

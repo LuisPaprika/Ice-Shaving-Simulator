@@ -16,7 +16,7 @@ public class HoveringInteractable : MonoBehaviour
 
     private void RaycastHitHandle()
     {
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, playerInteract.interactDistance))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
         {
             if (hitInfo.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
             {

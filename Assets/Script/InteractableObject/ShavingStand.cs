@@ -27,7 +27,6 @@ public class ShavingStand : MonoBehaviour, IInteractable
         if (CupSlot.childCount > 0 && currentIce > 0)
         {
             player.GetComponent<PlayerMovement>().enabled = false;
-            player.GetComponent<PlayerInteract>().enabled = false;
 
             player.GetComponent<ShavingStandMode>().enabled = true;
             player.GetComponent<ShavingStandMode>().Init(player, cameraPosition);

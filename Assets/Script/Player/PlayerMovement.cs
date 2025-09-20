@@ -12,12 +12,17 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraTransform;
     private CharacterController cc;
     public InputSystem_Actions InputActions { get; private set; }
+
     void Awake()
+    {
+        InputActions = new InputSystem_Actions();
+        Init();
+    }
+    public void Init()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        InputActions = new InputSystem_Actions();
         InputActions.Player.Enable();
 
         cc = GetComponent<CharacterController>();

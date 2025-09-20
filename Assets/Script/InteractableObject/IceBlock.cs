@@ -2,18 +2,20 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class IceBlock : MonoBehaviour, IPickable, IInteractable
+public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
 {
     [SerializeField] private string interactPrompt;
+    private bool inMachine = false;
     public static event Action<string> onHovered;
 
     public void Interact(Transform transform, PlayerMovement player)
     {
-        
+
     }
 
     public void putInMachine(GameObject targetMachine)
     {
+        inMachine = true;
         if (targetMachine.TryGetComponent<IceShavingMachine>(out IceShavingMachine iceShavingMachine))
         {
             if (iceShavingMachine.iceSlot.childCount == 0)
@@ -23,8 +25,6 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable
                 transform.rotation = Quaternion.identity;
                 StartCoroutine(lerpObject(transform.position, iceShavingMachine.iceSlot.transform.position, transform));
                 transform.SetParent(iceShavingMachine.iceSlot.transform);
-
-                transform.GetComponent<Collider>().enabled = false;
             }
         }
         else if (targetMachine.TryGetComponent<ShavingStand>(out ShavingStand shavingStand))
@@ -36,8 +36,6 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable
                 transform.rotation = Quaternion.identity;
                 StartCoroutine(lerpObject(transform.position, shavingStand.IceSlot.transform.position, transform));
                 transform.SetParent(shavingStand.IceSlot.transform);
-
-                transform.GetComponent<Collider>().enabled = false;
             }
         }
 
@@ -48,10 +46,19 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable
         onHovered?.Invoke(interactPrompt);
     }
 
+    public void Grab()
+    {
+        Debug.Log("Grabbing");
+    }
+
     public void Pickup(Transform objectPickupPoint)
     {
-        transform.SetParent(objectPickupPoint);
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, transform));
+        if (!inMachine)
+        {
+            transform.SetParent(objectPickupPoint);
+            StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, transform));
+        }
+
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)

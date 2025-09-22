@@ -55,7 +55,8 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
 
         currentIce--;
         Destroy(cupSlot.GetChild(0).gameObject); //Destroy emptyCup
-        Instantiate(shavedIcePrefab, cupSlot.position, Quaternion.identity);
+        GameObject obj = Instantiate(shavedIcePrefab, cupSlot.position, Quaternion.identity);
+        obj.transform.SetParent(cupSlot);
 
         if (currentIce <= 0)
         {

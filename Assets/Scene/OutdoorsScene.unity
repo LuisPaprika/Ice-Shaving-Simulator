@@ -2263,6 +2263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7665980512329860674, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
+      propertyPath: <InteractDistance>k__BackingField
+      value: 2.75
+      objectReference: {fileID: 0}
     - target: {fileID: 9145684372968616049, guid: 6fae1802ecb45884ab874bef69b1ba2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

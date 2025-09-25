@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Customer : MonoBehaviour
     private Transform endPosition;
     private Transform waitPosition;
     private ShavedIceFlavor req;
+    [SerializeField] private GameObject timeSlider;
     [SerializeField] private Transform requestSlot;
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;
     [SerializeField] private ParticleSystem correctParticle;
@@ -48,6 +50,7 @@ public class Customer : MonoBehaviour
         }
         obj.position = targetPostion;
 
+        timeSlider.SetActive(true);
         GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(req), requestSlot.position, Quaternion.identity, requestSlot);
         requestDisplay.GetComponent<Collider>().enabled = false;
 
@@ -56,12 +59,24 @@ public class Customer : MonoBehaviour
 
     private IEnumerator waiting(float time, Vector3 position)
     {
-        yield return new WaitForSeconds(time);
+        timeSlider.GetComponent<Slider>().maxValue = time;
+        float currentTime = time;
+        while (currentTime > 0)
+        {
+            currentTime -= Time.deltaTime;
+            timeSlider.GetComponent<Slider>().value = currentTime;
+            yield return null;
+        }
+        
+        timeSlider.GetComponent<Slider>().value = 0f;
+        Instantiate(wrongParticle, transform.position, Quaternion.identity);
         StartCoroutine(exiting(position, transform));
     }
 
     private IEnumerator exiting(Vector3 targetPostion, Transform obj)
     {
+        timeSlider.GetComponent<Slider>().value = 0f;
+        timeSlider.SetActive(false);
         disableCustomer();
 
         while (Vector3.Distance(transform.position, targetPostion) > 0.01f)

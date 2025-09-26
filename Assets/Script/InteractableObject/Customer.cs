@@ -22,6 +22,7 @@ public class Customer : MonoBehaviour
         {
             Instantiate(correctParticle, transform.position, Quaternion.identity);
             StartCoroutine(exiting(endPosition.position, transform));
+            WalletManager.SetMoney(WalletManager.Money + 50);
         }
         else
         {

@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceShavingMachine : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject shavedIcePrefab;
+    [SerializeField] private GameObject timerSlider;
+    [SerializeField] private GameObject iceCount;
     [SerializeField] private string interactPrompt;
     [SerializeField] private float iceShavingDuration;
     private int currentIce;
@@ -15,30 +18,33 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
 
     public void Interact(Transform transform, PlayerMovement player)
     {
-        shaveIce();
+        ShaveIce();
     }
 
-    private void enablingMachine(bool isEnabled)
+    private void EnablingMachine(bool isEnabled)
     {
         gameObject.GetComponent<Collider>().enabled = isEnabled;
     }
 
-    private void shaveIce()
+    private void ShaveIce()
     {
-        if (cupSlot.childCount > 0 && currentIce > 0)
+        if (cupSlot.GetComponentInChildren<EmptyCup>() && currentIce > 0)
         {
-            enablingMachine(false);
+            timerSlider.SetActive(true);
+            EnablingMachine(false);
 
             Transform cup = cupSlot.GetChild(0);
             cup.GetComponent<Collider>().enabled = false;
 
-            StartCoroutine(shavingIce(iceShavingDuration));
+            StartCoroutine(ShavingIce(iceShavingDuration));
         }
     }
 
     public void RefillIce()
     {
+        iceCount.SetActive(true);
         currentIce = 5;
+        iceCount.GetComponent<TextMeshProUGUI>().text = currentIce.ToString();
     }
 
     public void Hovered()
@@ -49,11 +55,21 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
         }
     }
 
-    private IEnumerator shavingIce(float duration)
+    private IEnumerator ShavingIce(float duration)
     {
-        yield return new WaitForSeconds(duration);
+        timerSlider.GetComponent<Slider>().maxValue = duration;
+        timerSlider.GetComponent<Slider>().value = 0f;
+        float currentTime = 0;
+
+        while (timerSlider.GetComponent<Slider>().value < duration)
+        {
+            currentTime += Time.deltaTime;
+            timerSlider.GetComponent<Slider>().value = currentTime;
+            yield return null;
+        }
 
         currentIce--;
+        iceCount.GetComponent<TextMeshProUGUI>().text = currentIce.ToString();
         Destroy(cupSlot.GetChild(0).gameObject); //Destroy emptyCup
         GameObject obj = Instantiate(shavedIcePrefab, cupSlot.position, Quaternion.identity);
         obj.transform.SetParent(cupSlot);
@@ -61,10 +77,12 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
         if (currentIce <= 0)
         {
             currentIce = 0;
+            iceCount.SetActive(false);
             Destroy(iceSlot.GetChild(0).gameObject);
         }
 
-        enablingMachine(true);
+        EnablingMachine(true);
+        timerSlider.SetActive(false);
 
     }
 }

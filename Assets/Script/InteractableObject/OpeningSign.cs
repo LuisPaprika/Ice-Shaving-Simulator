@@ -23,6 +23,7 @@ public class OpeningSign : MonoBehaviour, IInteractable
     private void playFlipAnimation()
     {
         isOpen = !isOpen;
+        UIManager.Instance.ToggleOpenCloseText(isOpen);
         if (isOpen)
         {
             flipAnimator.SetTrigger("Open");

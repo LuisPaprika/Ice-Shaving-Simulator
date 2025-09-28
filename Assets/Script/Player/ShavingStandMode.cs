@@ -78,7 +78,7 @@ public class ShavingStandMode : MonoBehaviour
         obj.rotation = targetPostion.rotation;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         inputActions.Shaving.Exit.performed -= ExitShavingMode;
     }

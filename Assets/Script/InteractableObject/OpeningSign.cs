@@ -49,7 +49,6 @@ public class OpeningSign : MonoBehaviour, IInteractable
 
             yield return null;
         }
-        Debug.Log("Start Spawning");
         onOpenStore?.Invoke();
     }
 

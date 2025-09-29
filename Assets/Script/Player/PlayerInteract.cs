@@ -52,7 +52,10 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent<Customer>(out Customer customer) && objectPickupPoint.GetChild(0).TryGetComponent<ShavedIce>(out ShavedIce shavedIce1))
                 {
-                    shavedIce1.Give(hitInfo.transform.gameObject);
+                    if (customer.Interactable)
+                    {
+                        shavedIce1.Give(hitInfo.transform.gameObject);
+                    }
                 }
 
                 else if (objectPickupPoint.GetChild(0).TryGetComponent<EmptyCup>(out EmptyCup emptyCup))

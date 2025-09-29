@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform endPosition;
-    [SerializeField] private Transform waitPosition;
+    [SerializeField] private GameObject[] positions;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float waitingTime;
     [SerializeField] private float spawnInitial;
@@ -16,12 +17,14 @@ public class CustomerSpawner : MonoBehaviour
     {
         OpeningSign.onOpenStore += StartSpawning;
         OpeningSign.onCloseStore += StopSpawning;
+
+        QueueManager.SetPositions(positions);
     }
 
     private void StartSpawning()
     {
         allowSpawning = true;
-        StartCoroutine(spawnCustomer(Random.Range(2, 5)));
+        StartCoroutine(SpawnCustomer(Random.Range(2, 5)));
     }
 
     private void StopSpawning()
@@ -29,15 +32,19 @@ public class CustomerSpawner : MonoBehaviour
         allowSpawning = false;
     }
 
-    private IEnumerator spawnCustomer(float startDelay)
+    private IEnumerator SpawnCustomer(int startDelay)
     {
         yield return new WaitForSeconds(startDelay);
-
-        while (allowSpawning)
+        while (allowSpawning && QueueManager.customerCount < 4)
         {
+            QueueManager.SetCustomerCount(QueueManager.customerCount + 1);
+    
             GameObject customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
+            QueueManager.CustomerQueue.Enqueue(customer);
+
             Customer script = customer.GetComponent<Customer>();
-            script.Init(shaveIcedAsset.getRandomFlavor(), waitPosition, endPosition, waitingTime, moveSpeed);
+            script.Init(shaveIcedAsset.getRandomFlavor(), waitingTime, QueueManager.Positions[QueueManager.customerCount].transform);
+
             yield return new WaitForSeconds(spawnInitial);
         }
     }

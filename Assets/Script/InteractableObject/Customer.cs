@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
-    private float moveSpeed;
+    [field: SerializeField] public bool Interactable;
     private float waitingTime;
-    private Transform endPosition;
-    private Transform waitPosition;
     private ShavedIceFlavor req;
     [SerializeField] private GameObject timeSlider;
     [SerializeField] private Transform requestSlot;
@@ -16,50 +15,44 @@ public class Customer : MonoBehaviour
     [SerializeField] private ParticleSystem wrongParticle;
 
 
-    public void deliver(ShavedIce recievedItem)
+    public void Deliver(ShavedIce recievedItem)
     {
         if (recievedItem.flavor == req)
         {
+            Interactable = false;
             Instantiate(correctParticle, transform.position, Quaternion.identity);
-            StartCoroutine(exiting(endPosition.position, transform));
+            Exit();
             WalletManager.SetMoney(WalletManager.Money + 50);
         }
         else
         {
+            Interactable = false;
             Instantiate(wrongParticle, transform.position, Quaternion.identity);
-            StartCoroutine(exiting(endPosition.position, transform));
+            Exit();
         }
     }
 
-    public void Init(ShavedIceFlavor request, Transform waitPoint, Transform endPoint, float waitTime, float speed)
+    public void StartWaiting()
     {
-        waitPosition = waitPoint;
-        endPosition = endPoint;
-        moveSpeed = speed;
+        Interactable = true;
+        StartCoroutine(Waiting(waitingTime));
+    }
+
+    public void Init(ShavedIceFlavor request, float waitTime, Transform position)
+    {
+        Interactable = false;
         waitingTime = waitTime;
         req = request;
 
-        StartCoroutine(goToQueue(waitPosition.position, endPoint.position, transform));
+        gameObject.GetComponent<NavMeshAgent>().SetDestination(position.position);
     }
 
-    private IEnumerator goToQueue(Vector3 targetPostion, Vector3 destroyPosition, Transform obj)
+    private IEnumerator Waiting(float time)
     {
-        while (Vector3.Distance(transform.position, targetPostion) != 0f)
-        {
-            obj.position = Vector3.MoveTowards(transform.position, targetPostion, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-        obj.position = targetPostion;
-
         timeSlider.SetActive(true);
         GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(req), requestSlot.position, Quaternion.identity, requestSlot);
         requestDisplay.GetComponent<Collider>().enabled = false;
 
-        StartCoroutine(waiting(waitingTime, destroyPosition));
-    }
-
-    private IEnumerator waiting(float time, Vector3 position)
-    {
         timeSlider.GetComponent<Slider>().maxValue = time;
         float currentTime = time;
         while (currentTime > 0)
@@ -68,31 +61,19 @@ public class Customer : MonoBehaviour
             timeSlider.GetComponent<Slider>().value = currentTime;
             yield return null;
         }
-        
-        timeSlider.GetComponent<Slider>().value = 0f;
+
+        Interactable = false;
+
         Instantiate(wrongParticle, transform.position, Quaternion.identity);
-        StartCoroutine(exiting(position, transform));
+        Exit();
     }
-
-    private IEnumerator exiting(Vector3 targetPostion, Transform obj)
+    private void Exit()
     {
-        timeSlider.GetComponent<Slider>().value = 0f;
+        QueueManager.MoveQueue();
+        QueueManager.SetCustomerCount(QueueManager.customerCount - 1);
+
+        transform.GetChild(0).gameObject.SetActive(false);
         timeSlider.SetActive(false);
-        disableCustomer();
-
-        while (Vector3.Distance(transform.position, targetPostion) > 0.01f)
-        {
-            obj.position = Vector3.MoveTowards(transform.position, targetPostion, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        obj.position = targetPostion;
-        Destroy(transform.gameObject);
-    }
-
-    private void disableCustomer()
-    {
-        transform.GetComponent<Collider>().enabled = false;
-        Destroy(transform.GetChild(0).gameObject);
+        timeSlider.GetComponent<Slider>().value = 0f;
     }
 }

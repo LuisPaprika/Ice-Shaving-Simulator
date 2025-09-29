@@ -42,7 +42,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 
     public void Give(GameObject targetPerson)
     {
-        targetPerson.GetComponent<Customer>().deliver(this);
+        targetPerson.GetComponent<Customer>().Deliver(this);
         StartCoroutine(giveObject(transform.position, targetPerson.transform.position, transform));
     }
 

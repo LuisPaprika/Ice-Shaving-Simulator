@@ -7,7 +7,6 @@ public class CustomerDestroyer : MonoBehaviour
         if (other.GetComponent<Customer>())
         {
             Destroy(other.gameObject);
-            QueueManager.CustomerQueue.Dequeue();
         }
     }
 }

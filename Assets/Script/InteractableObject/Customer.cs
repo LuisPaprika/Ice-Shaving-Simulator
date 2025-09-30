@@ -34,7 +34,6 @@ public class Customer : MonoBehaviour
 
     public void StartWaiting()
     {
-        Interactable = true;
         StartCoroutine(Waiting(waitingTime));
     }
 
@@ -49,6 +48,8 @@ public class Customer : MonoBehaviour
 
     private IEnumerator Waiting(float time)
     {
+        Interactable = true;
+
         timeSlider.SetActive(true);
         GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(req), requestSlot.position, Quaternion.identity, requestSlot);
         requestDisplay.GetComponent<Collider>().enabled = false;
@@ -70,10 +71,10 @@ public class Customer : MonoBehaviour
     private void Exit()
     {
         QueueManager.MoveQueue();
-        QueueManager.SetCustomerCount(QueueManager.customerCount - 1);
 
         transform.GetChild(0).gameObject.SetActive(false);
         timeSlider.SetActive(false);
         timeSlider.GetComponent<Slider>().value = 0f;
     }
+
 }

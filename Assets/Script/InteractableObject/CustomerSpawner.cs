@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] positions;
+    [SerializeField] private GameObject[] positions; //index 0 is destroy position
     [SerializeField] private float moveSpeed;
     [SerializeField] private float waitingTime;
     [SerializeField] private float spawnInitial;

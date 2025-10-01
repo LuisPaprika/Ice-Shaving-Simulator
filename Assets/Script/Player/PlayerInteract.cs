@@ -90,11 +90,11 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (objectPickupPoint.GetChild(0).TryGetComponent(out Cone cone))
                 {
-                    if (hitInfo.transform.TryGetComponent(out VanillaIceCream vanillaIceCream))
+                    if (hitInfo.transform.TryGetComponent(out IceCream iceCream))
                     {
                         if (cone.currentScoop < 3)
                         {
-                            vanillaIceCream.Scoop(cone.gameObject);
+                            iceCream.Scoop(cone.gameObject);
                         }
                     }
                 }

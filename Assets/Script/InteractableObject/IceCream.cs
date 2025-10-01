@@ -2,14 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VanillaIceCream : MonoBehaviour, IInteractable
+public class IceCream : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject progressSlider;
-    [SerializeField] private GameObject vanillaScoopPrefab;
+    [SerializeField] private GameObject scoopPrefab;
     [SerializeField] private float scoopTime = 0.5f;
     private bool isLooked;
     private bool interactable = true;
-    private IceCreamFlavor flavor = IceCreamFlavor.Vanilla;
+    [SerializeField] private IceCreamFlavor flavor;
 
     private void FixedUpdate()
     {
@@ -63,7 +63,7 @@ public class VanillaIceCream : MonoBehaviour, IInteractable
     
     private void _Scoop(GameObject cone)
     {
-        GameObject scoop = Instantiate(vanillaScoopPrefab, transform.position, Quaternion.identity, transform);
+        GameObject scoop = Instantiate(scoopPrefab, transform.position, Quaternion.identity, transform);
         cone.GetComponent<Cone>().AddScoop(scoop, flavor);
     }
 }

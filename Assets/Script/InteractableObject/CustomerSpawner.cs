@@ -43,7 +43,7 @@ public class CustomerSpawner : MonoBehaviour
             QueueManager.CustomerQueue.Enqueue(customer);
 
             Customer script = customer.GetComponent<Customer>();
-            script.Init(shaveIcedAsset.getRandomFlavor(), waitingTime, QueueManager.Positions[QueueManager.customerCount].transform);
+            script.Init(OrderAssets.Instance.GetRandomOrder(), waitingTime, QueueManager.Positions[QueueManager.customerCount].transform);
 
             yield return new WaitForSeconds(spawnInitial);
         }

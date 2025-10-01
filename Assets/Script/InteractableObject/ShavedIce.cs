@@ -2,14 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public enum ShavedIceFlavor
-{
-    Blank,
-    Strawberry,
-    Chocolate,
-    Milk
-}
-
 
 public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 {
@@ -41,7 +33,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 
     public void Give(GameObject targetPerson)
     {
-        targetPerson.GetComponent<Customer>().Deliver(this);
+        targetPerson.GetComponent<Customer>().Deliver(gameObject);
         StartCoroutine(giveObject(transform.position, targetPerson.gameObject, transform));
     }
 

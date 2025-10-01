@@ -7,7 +7,7 @@ public class Customer : MonoBehaviour
 {
     [field: SerializeField] public bool Interactable;
     private float waitingTime;
-    private ShavedIceFlavor req;
+    private GameObject request;
     [SerializeField] private GameObject timeSlider;
     [SerializeField] private Transform requestSlot;
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;
@@ -15,20 +15,39 @@ public class Customer : MonoBehaviour
     [SerializeField] private ParticleSystem wrongParticle;
 
 
-    public void Deliver(ShavedIce recievedItem)
+    public void Deliver(GameObject recievedItem)
     {
-        if (recievedItem.flavor == req)
+        if (request.GetComponent<ShavedIce>())
         {
-            Interactable = false;
-            Instantiate(correctParticle, transform.position, Quaternion.identity);
-            Exit();
-            WalletManager.SetMoney(WalletManager.Money + 50);
+            if (DeliverManager.CompareShavedIce(request, recievedItem))
+            {
+                Interactable = false;
+                Instantiate(correctParticle, transform.position, Quaternion.identity);
+                WalletManager.SetMoney(WalletManager.Money + 50);
+                Exit();
+            }
+            else
+            {
+                Interactable = false;
+                Instantiate(wrongParticle, transform.position, Quaternion.identity);
+                Exit();
+            }
         }
-        else
+        else if (request.GetComponent<Cone>())
         {
-            Interactable = false;
-            Instantiate(wrongParticle, transform.position, Quaternion.identity);
-            Exit();
+            if (DeliverManager.CompareCone(request, recievedItem))
+            {
+                Interactable = false;
+                Instantiate(correctParticle, transform.position, Quaternion.identity);
+                WalletManager.SetMoney(WalletManager.Money + 50);
+                Exit();
+            }
+            else
+            {
+                Interactable = false;
+                Instantiate(wrongParticle, transform.position, Quaternion.identity);
+                Exit();
+            }
         }
     }
 
@@ -37,11 +56,11 @@ public class Customer : MonoBehaviour
         StartCoroutine(Waiting(waitingTime));
     }
 
-    public void Init(ShavedIceFlavor request, float waitTime, Transform position)
+    public void Init(GameObject request, float waitTime, Transform position)
     {
         Interactable = false;
         waitingTime = waitTime;
-        req = request;
+        this.request = request;
 
         gameObject.GetComponent<NavMeshAgent>().SetDestination(position.position);
     }
@@ -51,7 +70,7 @@ public class Customer : MonoBehaviour
         Interactable = true;
 
         timeSlider.SetActive(true);
-        GameObject requestDisplay = Instantiate(shaveIcedAsset.getPrefab(req), requestSlot.position, Quaternion.identity, requestSlot);
+        GameObject requestDisplay = Instantiate(request, requestSlot.position, Quaternion.identity, requestSlot);
         requestDisplay.GetComponent<Collider>().enabled = false;
 
         timeSlider.GetComponent<Slider>().maxValue = time;

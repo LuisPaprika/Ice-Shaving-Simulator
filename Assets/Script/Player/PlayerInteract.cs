@@ -62,11 +62,18 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (hitInfo.transform.TryGetComponent(out Customer customer) && objectPickupPoint.GetChild(0).TryGetComponent<ShavedIce>(out ShavedIce shavedIce1))
+                else if (hitInfo.transform.TryGetComponent(out Customer customer))
                 {
                     if (customer.Interactable)
                     {
-                        shavedIce1.Give(hitInfo.transform.gameObject);
+                        if (objectPickupPoint.GetChild(0).TryGetComponent(out ShavedIce shavedIce1))
+                        {
+                            shavedIce1.Give(hitInfo.transform.gameObject);
+                        }
+                        else if (objectPickupPoint.GetChild(0).TryGetComponent(out Cone cone))
+                        {
+                            cone.Give(hitInfo.transform.gameObject);
+                        }
                     }
                 }
 

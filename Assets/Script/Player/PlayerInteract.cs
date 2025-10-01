@@ -21,12 +21,12 @@ public class PlayerInteract : MonoBehaviour
         {
             if (objectPickupPoint.transform.childCount == 0) //Empty Hand
             {
-                if (hitInfo.collider.TryGetComponent<IPickable>(out IPickable pickable))
+                if (hitInfo.collider.TryGetComponent(out IPickable pickable))
                 {
                     pickable.Pickup(objectPickupPoint);
                 }
 
-                else if (hitInfo.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+                else if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
                     interactable.Interact(objectPickupPoint, player);
                 }
@@ -39,10 +39,10 @@ public class PlayerInteract : MonoBehaviour
                     Transform child = objectPickupPoint.GetChild(0);
                     objectPickupPoint.DetachChildren();
                     child.rotation = Quaternion.identity;
-                    StartCoroutine(lerpObject(child.position, hitInfo.point, child.transform));
+                    StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform));
                 }
 
-                else if (hitInfo.transform.TryGetComponent<ShavedIce>(out ShavedIce shavedIce) && objectPickupPoint.GetChild(0).TryGetComponent<Syrup>(out Syrup syrup))
+                else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.GetChild(0).TryGetComponent<Syrup>(out Syrup syrup))
                 {
                     if (hitInfo.transform.gameObject.tag == "Unflavored")
                     {
@@ -50,7 +50,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (hitInfo.transform.TryGetComponent<Customer>(out Customer customer) && objectPickupPoint.GetChild(0).TryGetComponent<ShavedIce>(out ShavedIce shavedIce1))
+                else if (hitInfo.transform.TryGetComponent(out Customer customer) && objectPickupPoint.GetChild(0).TryGetComponent<ShavedIce>(out ShavedIce shavedIce1))
                 {
                     if (customer.Interactable)
                     {
@@ -58,7 +58,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (objectPickupPoint.GetChild(0).TryGetComponent<EmptyCup>(out EmptyCup emptyCup))
+                else if (objectPickupPoint.GetChild(0).TryGetComponent(out EmptyCup emptyCup))
                 {
                     if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
                         hitInfo.transform.GetComponent<ShavingStand>())
@@ -67,7 +67,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
                 
-                else if (objectPickupPoint.GetChild(0).TryGetComponent<IceBlock>(out IceBlock iceBlock))
+                else if (objectPickupPoint.GetChild(0).TryGetComponent(out IceBlock iceBlock))
                 {
                     if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
                         hitInfo.transform.GetComponent<ShavingStand>())
@@ -76,7 +76,18 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (hitInfo.transform.TryGetComponent<TrashCan>(out TrashCan trashCan))
+                else if (objectPickupPoint.GetChild(0).TryGetComponent(out Cone cone))
+                {
+                    if (hitInfo.transform.TryGetComponent(out VanillaIceCream vanillaIceCream))
+                    {
+                        if (cone.currentScoop < 3)
+                        {
+                            vanillaIceCream.Scoop(cone.gameObject);
+                        }
+                    }
+                }
+
+                else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
                 {
                     Transform holdingItem = objectPickupPoint.GetChild(0);
                     if (!holdingItem.GetComponent<Syrup>())
@@ -94,7 +105,7 @@ public class PlayerInteract : MonoBehaviour
         player.InputActions.Player.Disable();
     }
 
-    private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator PlaceObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
     {
         float currentTime = 0f;
         float duration = 0.1f;

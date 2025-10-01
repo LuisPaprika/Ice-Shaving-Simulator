@@ -23,7 +23,7 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
                 iceShavingMachine.RefillIce();
 
                 transform.rotation = Quaternion.identity;
-                StartCoroutine(lerpObject(transform.position, iceShavingMachine.iceSlot.transform.position, transform));
+                StartCoroutine(lerpObject(transform.position, iceShavingMachine.iceSlot.gameObject, transform));
                 transform.SetParent(iceShavingMachine.iceSlot.transform);
             }
         }
@@ -34,7 +34,7 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
                 shavingStand.RefillIce();
 
                 transform.rotation = Quaternion.identity;
-                StartCoroutine(lerpObject(transform.position, shavingStand.IceSlot.transform.position, transform));
+                StartCoroutine(lerpObject(transform.position, shavingStand.IceSlot.gameObject, transform));
                 transform.SetParent(shavingStand.IceSlot.transform);
             }
         }
@@ -56,21 +56,21 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
         if (!inMachine)
         {
             transform.SetParent(objectPickupPoint);
-            StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, transform));
+            StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
         }
 
     }
 
-    private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)
     {
         float currentTime = 0f;
         float duration = 0.1f;
         while (currentTime < duration)
         {
-            obj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
+            obj.position = Vector3.Lerp(startPostion, targetPostion.transform.position, currentTime / duration);
             currentTime += Time.deltaTime;
             yield return null;
         }
-        obj.position = targetPostion;
+        obj.position = targetPostion.transform.position;
     }
 }

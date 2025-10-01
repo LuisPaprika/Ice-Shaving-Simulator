@@ -3,12 +3,6 @@ using UnityEngine;
 public class HoveringInteractable : MonoBehaviour
 {
     [SerializeField] private PlayerInteract playerInteract;
-    private Transform cameraTransform;
-    void Awake()
-    {
-        cameraTransform = GetComponentInChildren<Camera>().transform;
-    }
-
     void Update()
     {
         RaycastHitHandle();
@@ -16,12 +10,20 @@ public class HoveringInteractable : MonoBehaviour
 
     private void RaycastHitHandle()
     {
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
         {
-            if (hitInfo.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+            if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
             {
-                interactable.Hovered();
+                UIManager.Instance.ChangeCrosshair(Color.black);
             }
+            else
+            {
+                UIManager.Instance.ChangeCrosshair(Color.white);
+            }
+        }
+        else
+        {
+            UIManager.Instance.ChangeCrosshair(Color.white);
         }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
 public class ShavingStandMode : MonoBehaviour
 {
@@ -41,7 +40,7 @@ public class ShavingStandMode : MonoBehaviour
     {
         if (Physics.Raycast(cam.ScreenPointToRay(Mouse.current.position.ReadValue()), out RaycastHit hitInfo))
         {
-            if (hitInfo.collider.TryGetComponent<IceBlock>(out IceBlock iceBlock))
+            if (hitInfo.collider.TryGetComponent(out IceBlock iceBlock))
             {
                 iceBlock.Grab();
             }

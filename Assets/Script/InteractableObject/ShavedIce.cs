@@ -43,13 +43,13 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
     public void Give(GameObject targetPerson)
     {
         targetPerson.GetComponent<Customer>().Deliver(this);
-        StartCoroutine(giveObject(transform.position, targetPerson.transform.position, transform));
+        StartCoroutine(giveObject(transform.position, targetPerson.gameObject, transform));
     }
 
     public void Pickup(Transform objectPickupPoint)
     {
         transform.SetParent(objectPickupPoint);
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, transform));
+        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
     }
 
     public void Hovered()
@@ -62,30 +62,30 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 
     }
 
-    private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)
     {
         float currentTime = 0f;
         float duration = 0.1f;
         while (currentTime < duration)
         {
-            obj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
+            obj.position = Vector3.Lerp(startPostion, targetPostion.transform.position, currentTime / duration);
             currentTime += Time.deltaTime;
             yield return null;
         }
-        obj.position = targetPostion;
+        obj.position = targetPostion.transform.position;
     }
 
-    private IEnumerator giveObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator giveObject(Vector3 startPostion, GameObject targetPostion, Transform obj)
     {
         float currentTime = 0f;
         float duration = 0.1f;
         while (currentTime < duration)
         {
-            obj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
+            obj.position = Vector3.Lerp(startPostion, targetPostion.transform.position, currentTime / duration);
             currentTime += Time.deltaTime;
             yield return null;
         }
-        obj.position = targetPostion;
+        obj.position = targetPostion.transform.position;
         Destroy(obj.gameObject);
     }
 }

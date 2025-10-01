@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [field: SerializeField] public static UIManager Instance { get; private set; }
-    [SerializeField] private TextMeshProUGUI MoneyText;
-    [SerializeField] private TextMeshProUGUI OpenCloseText;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI openCloseText;
+    [SerializeField] private Image crosshair;
     void Awake()
     {
         if (Instance == null)
@@ -20,19 +22,24 @@ public class UIManager : MonoBehaviour
 
     public void SetMoneyText(string text)
     {
-        MoneyText.text = text + " $";
+        moneyText.text = text + " $";
     }
 
     public void ToggleOpenCloseText(bool isOpen)
     {
         if (isOpen)
         {
-            OpenCloseText.text = "OPEN";
+            openCloseText.text = "OPEN";
         }
         else
         {
-            OpenCloseText.text = "CLOSE";
+            openCloseText.text = "CLOSE";
         }
-        
+
+    }
+
+    public void ChangeCrosshair(Color color)
+    {
+        crosshair.color = color;
     }
 }

@@ -12,7 +12,6 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
     [SerializeField] private string interactPrompt;
     [SerializeField] private float iceShavingDuration;
     private int currentIce;
-    public static event Action<string> onHovered;
     [field: SerializeField] public Transform cupSlot { get; private set; }
     [field: SerializeField] public Transform iceSlot { get; private set; }
 
@@ -49,10 +48,7 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
 
     public void Hovered()
     {
-        if (cupSlot.childCount > 0 && currentIce > 0)
-        {
-            onHovered?.Invoke(interactPrompt);
-        }
+        
     }
 
     private IEnumerator ShavingIce(float duration)

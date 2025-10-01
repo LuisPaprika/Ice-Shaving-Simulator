@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,17 @@ public class PlayerInteract : MonoBehaviour
         cameraTransform = GetComponentInChildren<Camera>().transform;
 
         player.InputActions.Player.Attack.performed += InteractHandle;
+    }
+
+    void FixedUpdate()
+    {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, InteractDistance))
+        {
+            if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.Hovered();
+            }
+        }
     }
 
     private void InteractHandle(InputAction.CallbackContext context)
@@ -66,7 +78,7 @@ public class PlayerInteract : MonoBehaviour
                         emptyCup.putInMachine(hitInfo.transform.gameObject);
                     }
                 }
-                
+
                 else if (objectPickupPoint.GetChild(0).TryGetComponent(out IceBlock iceBlock))
                 {
                     if (hitInfo.transform.GetComponent<IceShavingMachine>() ||

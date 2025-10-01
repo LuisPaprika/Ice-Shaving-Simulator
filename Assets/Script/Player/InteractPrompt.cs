@@ -11,11 +11,6 @@ public class InteractPrompt : MonoBehaviour
         player = FindFirstObjectByType<PlayerMovement>();
 
         prompt = gameObject.GetComponent<TMP_Text>();
-
-        Syrup.onHovered += setText;
-        ShavedIce.onHovered += setText;
-        EmptyCup.onHovered += setText;
-        IceShavingMachine.onHovered += setText;
     }
 
     void Update()
@@ -34,11 +29,4 @@ public class InteractPrompt : MonoBehaviour
         return InputControlPath.ToHumanReadableString(action.bindings[0].path);
     }
 
-    void OnDestroy()
-    {
-        Syrup.onHovered -= setText;
-        ShavedIce.onHovered -= setText;
-        EmptyCup.onHovered -= setText;
-        IceShavingMachine.onHovered -= setText;
-    }
 }

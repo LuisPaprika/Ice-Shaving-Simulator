@@ -6,8 +6,6 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private ShavedIceFlavor flavor;
-    private bool isPicked;
-    public static event Action<string> onHovered;
 
     public void Interact(Transform transform, PlayerMovement player)
     {
@@ -15,7 +13,7 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
     }
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     public void Pickup(Transform objectPickupPoint)

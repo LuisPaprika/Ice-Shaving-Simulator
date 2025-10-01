@@ -6,11 +6,10 @@ public class IceStorage : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject iceBlockPrefab;
     [SerializeField] private string interactPrompt;
-    public static event Action<string> onHovered;
 
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     public void Interact(Transform objectPickupPoint, PlayerMovement player)

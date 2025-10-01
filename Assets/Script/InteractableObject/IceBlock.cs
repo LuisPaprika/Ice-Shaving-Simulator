@@ -6,7 +6,6 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
 {
     [SerializeField] private string interactPrompt;
     private bool inMachine = false;
-    public static event Action<string> onHovered;
 
     public void Interact(Transform transform, PlayerMovement player)
     {
@@ -43,7 +42,7 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
 
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     public void Grab()

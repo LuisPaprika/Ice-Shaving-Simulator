@@ -5,13 +5,12 @@ using UnityEngine;
 public class CupStack : MonoBehaviour, IInteractable
 {
     [SerializeField] private string interactPrompt;
-    public static event Action<string> onHovered;
     [SerializeField] private GameObject emptyCupPrefab;
     private int currentCup = 5;
 
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     public void Interact(Transform objectPickupPoint, PlayerMovement player)

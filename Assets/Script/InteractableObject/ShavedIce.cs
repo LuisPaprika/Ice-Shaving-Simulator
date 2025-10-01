@@ -15,7 +15,6 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;
-    public static event Action<string> onHovered;
     [field: SerializeField] public ShavedIceFlavor flavor { get; private set; }
 
     public void AddFlavor(ShavedIceFlavor flavor)
@@ -54,7 +53,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     public void Interact(Transform objectPickupPoint, PlayerMovement player)

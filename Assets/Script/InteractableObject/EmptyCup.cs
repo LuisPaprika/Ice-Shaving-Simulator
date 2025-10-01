@@ -5,7 +5,6 @@ using UnityEngine;
 public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
-    public static event Action<string> onHovered;
     public void Pickup(Transform objectPickupPoint)
     {
         transform.SetParent(objectPickupPoint);
@@ -43,7 +42,7 @@ public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 
     public void Hovered()
     {
-        onHovered?.Invoke(interactPrompt);
+        
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)

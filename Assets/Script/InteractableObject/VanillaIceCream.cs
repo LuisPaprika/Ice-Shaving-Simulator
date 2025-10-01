@@ -7,12 +7,18 @@ public class VanillaIceCream : MonoBehaviour, IInteractable
     [SerializeField] private GameObject progressSlider;
     [SerializeField] private GameObject vanillaScoopPrefab;
     [SerializeField] private float scoopTime = 0.5f;
+    private bool isLooked;
     private bool interactable = true;
     private IceCreamFlavor flavor = IceCreamFlavor.Vanilla;
 
+    private void FixedUpdate()
+    {
+        isLooked = false;
+    }
+
     public void Hovered()
     {
-
+        isLooked = true;
     }
 
     public void Interact(Transform objectPickupPoint, PlayerMovement player)
@@ -34,7 +40,8 @@ public class VanillaIceCream : MonoBehaviour, IInteractable
 
         float currentTime = 0f;
         progressSlider.GetComponent<Slider>().maxValue = duration;
-        while (currentTime < duration)
+
+        while (isLooked && currentTime < duration)
         {
             interactable = false;
             currentTime += Time.deltaTime;
@@ -43,9 +50,10 @@ public class VanillaIceCream : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        if (currentTime >= duration)
+        if (isLooked && currentTime >= duration)
         {
             _Scoop(cone);
+            isLooked = false;
         }
 
         interactable = true;

@@ -86,7 +86,7 @@ public class OrderAssets : MonoBehaviour
 
     public GameObject GetRandomOrder()
     {
-        int index = Random.Range(3, menu.Count);
+        int index = Random.Range(0, menu.Count);
         return menu[index];
     }
 }

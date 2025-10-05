@@ -52,7 +52,7 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
         float duration = 0.1f;
         while (currentTime < duration)
         {
-            obj.position = Vector3.Lerp(startPostion, targetPostion.transform.position, currentTime / duration);
+            obj.position = Vector3.Lerp(obj.position, targetPostion.transform.position, currentTime / duration);
             currentTime += Time.deltaTime;
             yield return null;
         }

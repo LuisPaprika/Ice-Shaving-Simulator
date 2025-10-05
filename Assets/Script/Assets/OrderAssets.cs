@@ -1,38 +1,17 @@
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class OrderAssets : MonoBehaviour
 {
     [SerializeField] private List<GameObject> menu;
 
-    // [SerializeField] private GameObject strawberryShavedIce;
-    // [SerializeField] private GameObject chocolateShavedIce;
-    // [SerializeField] private GameObject milkShavedIce;
-
-    // [SerializeField] private GameObject coneStraw;
-    // [SerializeField] private GameObject coneVanil;
-    // [SerializeField] private GameObject coneChoco;
-
-    // [SerializeField] private GameObject coneVanilVanil;
-    // [SerializeField] private GameObject coneStrawStraw;
-    // [SerializeField] private GameObject coneChocoChoco;
-    // [SerializeField] private GameObject coneVanilChoco;
-    // [SerializeField] private GameObject coneVanilStraw;
-    // [SerializeField] private GameObject coneChocoStraw;
-
-    // [SerializeField] private GameObject coneStrawStrawStraw;
-    // [SerializeField] private GameObject coneChocoChocoChoco;
-    // [SerializeField] private GameObject coneVanilVanilVanil;
-    // [SerializeField] private GameObject coneVanilVanilStraw;
-    // [SerializeField] private GameObject coneVanilVanilChoco;
-    // [SerializeField] private GameObject coneChocoChocoStraw;
-    // [SerializeField] private GameObject coneChocoChocoVanil;
-    // [SerializeField] private GameObject coneStrawStrawChoco;
-    // [SerializeField] private GameObject coneStrawStrawVanil;
-    // [SerializeField] private GameObject coneVanilChocoStraw;
-
     [field: SerializeField] public static OrderAssets Instance { get; private set; }
 
+    void Awake()
+    {
+        Instance = this;
+    }
 
     private GameObject GetOrderAsset(GameObject order)
     {
@@ -53,7 +32,7 @@ public class OrderAssets : MonoBehaviour
         }
         else if (order.TryGetComponent(out Cone cone))
         {
-            var key = (cone.flavors[IceCreamFlavor.Vanilla], cone.flavors[IceCreamFlavor.Chocolate], cone.flavors[IceCreamFlavor.Strawberry]);
+            var key = (cone.vanilCount, cone.chocCount, cone.strawCount);
             switch (key)
             {
                 case (0, 0, 1):
@@ -107,6 +86,7 @@ public class OrderAssets : MonoBehaviour
 
     public GameObject GetRandomOrder()
     {
-        return menu[Random.Range(0, menu.Count)];
+        int index = Random.Range(3, menu.Count);
+        return menu[index];
     }
 }

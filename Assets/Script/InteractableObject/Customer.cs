@@ -7,7 +7,7 @@ public class Customer : MonoBehaviour
 {
     [field: SerializeField] public bool Interactable;
     private float waitingTime;
-    private GameObject request;
+    public GameObject request;
     [SerializeField] private GameObject timeSlider;
     [SerializeField] private Transform requestSlot;
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;

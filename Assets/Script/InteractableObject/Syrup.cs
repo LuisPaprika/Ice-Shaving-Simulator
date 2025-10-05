@@ -7,7 +7,7 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
     [SerializeField] private string interactPrompt;
     [SerializeField] private ShavedIceFlavor flavor;
 
-    public void Interact(Transform transform, PlayerMovement player)
+    public void Interact(GameObject transform, PlayerMovement player)
     {
 
     }
@@ -16,10 +16,10 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
         
     }
 
-    public void Pickup(Transform objectPickupPoint)
+    public void Pickup(GameObject objectPickupPoint)
     {
-        transform.SetParent(objectPickupPoint);
         StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+        transform.SetParent(objectPickupPoint.transform);
     }
 
     public ShavedIceFlavor getFlavor()

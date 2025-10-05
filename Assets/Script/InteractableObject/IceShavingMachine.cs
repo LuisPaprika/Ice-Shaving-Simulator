@@ -15,7 +15,7 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
     [field: SerializeField] public Transform cupSlot { get; private set; }
     [field: SerializeField] public Transform iceSlot { get; private set; }
 
-    public void Interact(Transform transform, PlayerMovement player)
+    public void Interact(GameObject transform, PlayerMovement player)
     {
         ShaveIce();
     }

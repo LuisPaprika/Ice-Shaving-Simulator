@@ -7,30 +7,14 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
     [field: SerializeField] public int currentScoop { get; private set; } = 0;
     [SerializeField] private GameObject[] scoopPos = new GameObject[3];
 
-    [SerializeField] private int chocCount = 0;
-    [SerializeField] private int vanilCount = 0;
-    [SerializeField] private int strawCount = 0;
+    [field: SerializeField] public int chocCount { get; private set; } = 0;
+    [field: SerializeField] public int vanilCount { get; private set; } = 0;
+    [field: SerializeField] public int strawCount { get; private set; } = 0;
 
-    [field: SerializeField]
-    public Dictionary<IceCreamFlavor, int> flavors { get; private set; }
-        = new Dictionary<IceCreamFlavor, int>
+    public void Pickup(GameObject objectPickupPoint)
     {
-        { IceCreamFlavor.Chocolate, 0 },
-        { IceCreamFlavor.Vanilla, 0 },
-        { IceCreamFlavor.Strawberry, 0 }
-    };
-
-    void Awake()
-    {
-        flavors[IceCreamFlavor.Chocolate] = chocCount;
-        flavors[IceCreamFlavor.Vanilla] = vanilCount;
-        flavors[IceCreamFlavor.Strawberry] = strawCount;
-    }
-
-    public void Pickup(Transform objectPickupPoint)
-    {
-        transform.SetParent(objectPickupPoint);
         StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void AddScoop(GameObject scoop, IceCreamFlavor flavor)
@@ -39,8 +23,21 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
         StartCoroutine(lerpObject(scoop.transform.position, scoopPos[currentScoop].transform.gameObject, scoop.transform));
 
         currentScoop++;
-        flavors[flavor]++;
+        switch (flavor)
+        {
+            case IceCreamFlavor.Vanilla:
+                vanilCount++;
+                return;
+            case IceCreamFlavor.Chocolate:
+                chocCount++;
+                return;
+            case IceCreamFlavor.Strawberry:
+                strawCount++;
+                return;
 
+            default:
+                return;
+        }
     }
 
     public void Give(GameObject targetPerson)
@@ -81,7 +78,7 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
 
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
 
     }

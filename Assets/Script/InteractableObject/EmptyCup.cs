@@ -5,10 +5,10 @@ using UnityEngine;
 public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
-    public void Pickup(Transform objectPickupPoint)
+    public void Pickup(GameObject objectPickupPoint)
     {
-        transform.SetParent(objectPickupPoint);
         StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void putInMachine(GameObject targetMachine)
@@ -35,7 +35,7 @@ public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 
     }
 
-    public void Interact(Transform transform, PlayerMovement player)
+    public void Interact(GameObject transform, PlayerMovement player)
     {
 
     }

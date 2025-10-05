@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IPickable
 {
-    void Pickup(Transform transform);
+    void Pickup(GameObject transform);
 }

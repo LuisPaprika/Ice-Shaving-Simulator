@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerInteract : MonoBehaviour
 {
     [field: SerializeField] public float InteractDistance { get; private set; }
-    [SerializeField] Transform objectPickupPoint;
-    [SerializeField] PlayerMovement player;
+    [SerializeField] private GameObject objectPickupPoint;
+    [SerializeField] private PlayerMovement player;
     private Transform cameraTransform;
     void Awake()
     {
@@ -48,13 +48,22 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Placable")) //Place Item
                 {
-                    Transform child = objectPickupPoint.GetChild(0);
-                    objectPickupPoint.DetachChildren();
+                    Transform child = objectPickupPoint.transform.GetChild(0);
+                    objectPickupPoint.transform.DetachChildren();
                     child.rotation = Quaternion.identity;
                     StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform));
                 }
 
-                else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.GetChild(0).TryGetComponent<Syrup>(out Syrup syrup))
+                else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
+                {
+                    Transform holdingItem = objectPickupPoint.transform.GetChild(0);
+                    if (!holdingItem.GetComponent<Syrup>())
+                    {
+                        trashCan.throwAwayItem(objectPickupPoint);
+                    }
+                }
+
+                else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.transform.GetChild(0).TryGetComponent<Syrup>(out Syrup syrup))
                 {
                     if (hitInfo.transform.gameObject.tag == "Unflavored")
                     {
@@ -66,18 +75,18 @@ public class PlayerInteract : MonoBehaviour
                 {
                     if (customer.Interactable)
                     {
-                        if (objectPickupPoint.GetChild(0).TryGetComponent(out ShavedIce shavedIce1))
+                        if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out ShavedIce shavedIce1))
                         {
                             shavedIce1.Give(hitInfo.transform.gameObject);
                         }
-                        else if (objectPickupPoint.GetChild(0).TryGetComponent(out Cone cone))
+                        else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Cone cone))
                         {
                             cone.Give(hitInfo.transform.gameObject);
                         }
                     }
                 }
 
-                else if (objectPickupPoint.GetChild(0).TryGetComponent(out EmptyCup emptyCup))
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out EmptyCup emptyCup))
                 {
                     if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
                         hitInfo.transform.GetComponent<ShavingStand>())
@@ -86,7 +95,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (objectPickupPoint.GetChild(0).TryGetComponent(out IceBlock iceBlock))
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out IceBlock iceBlock))
                 {
                     if (hitInfo.transform.GetComponent<IceShavingMachine>() ||
                         hitInfo.transform.GetComponent<ShavingStand>())
@@ -95,7 +104,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (objectPickupPoint.GetChild(0).TryGetComponent(out Cone cone))
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Cone cone))
                 {
                     if (hitInfo.transform.TryGetComponent(out IceCream iceCream))
                     {
@@ -103,15 +112,6 @@ public class PlayerInteract : MonoBehaviour
                         {
                             iceCream.Scoop(cone.gameObject);
                         }
-                    }
-                }
-
-                else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
-                {
-                    Transform holdingItem = objectPickupPoint.GetChild(0);
-                    if (!holdingItem.GetComponent<Syrup>())
-                    {
-                        trashCan.throwAwayItem(objectPickupPoint);
                     }
                 }
 

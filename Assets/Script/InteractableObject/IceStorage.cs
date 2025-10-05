@@ -12,15 +12,15 @@ public class IceStorage : MonoBehaviour, IInteractable
         
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         getIce(objectPickupPoint);
     }
 
-    private void getIce(Transform objectPickupPoint)
+    private void getIce(GameObject objectPickupPoint)
     {
-        GameObject iceBlock = Instantiate(iceBlockPrefab, transform.position, Quaternion.identity, objectPickupPoint);
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, iceBlock.transform));
+        GameObject iceBlock = Instantiate(iceBlockPrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
+        StartCoroutine(lerpObject(transform.position, objectPickupPoint.transform.position, iceBlock.transform));
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)

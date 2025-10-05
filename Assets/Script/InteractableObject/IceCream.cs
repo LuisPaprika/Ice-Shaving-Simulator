@@ -21,7 +21,7 @@ public class IceCream : MonoBehaviour, IInteractable
         isLooked = true;
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
 
     }

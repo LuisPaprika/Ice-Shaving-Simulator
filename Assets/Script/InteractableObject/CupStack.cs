@@ -13,18 +13,18 @@ public class CupStack : MonoBehaviour, IInteractable
         
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         pickupCup(objectPickupPoint);
     }
 
-    private void pickupCup(Transform objectPickupPoint)
+    private void pickupCup(GameObject objectPickupPoint)
     {
         if (currentCup > 0)
         {
             //currentCup--;
-            GameObject emptyCup = Instantiate(emptyCupPrefab, transform.position, Quaternion.identity, objectPickupPoint);
-            StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, emptyCup.transform));
+            GameObject emptyCup = Instantiate(emptyCupPrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
+            StartCoroutine(lerpObject(transform.position, objectPickupPoint.transform.position, emptyCup.transform));
         }
 
     }

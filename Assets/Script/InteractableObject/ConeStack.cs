@@ -10,18 +10,18 @@ public class ConeStack : MonoBehaviour, IInteractable
 
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         pickupCone(objectPickupPoint);
     }
 
-    private void pickupCone(Transform objectPickupPoint)
+    private void pickupCone(GameObject objectPickupPoint)
     {
         if (currentCone > 0)
         {
             //currentCone--;
-            GameObject emptyCup = Instantiate(conePrefab, transform.position, Quaternion.identity, objectPickupPoint);
-            StartCoroutine(lerpObject(transform.position, objectPickupPoint.position, emptyCup.transform));
+            GameObject emptyCup = Instantiate(conePrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
+            StartCoroutine(lerpObject(transform.position, objectPickupPoint.transform.position, emptyCup.transform));
         }
 
     }

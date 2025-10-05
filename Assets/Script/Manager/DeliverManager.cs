@@ -17,6 +17,9 @@ public class DeliverManager : MonoBehaviour
         {
             return false;
         }
-        return request.GetComponent<Cone>().flavors == recieved.GetComponent<Cone>().flavors;
+
+        
+
+        return true;
     }
 }

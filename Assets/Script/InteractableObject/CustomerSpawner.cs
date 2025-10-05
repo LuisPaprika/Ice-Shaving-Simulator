@@ -10,7 +10,6 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private float waitingTime;
     [SerializeField] private float spawnInitial;
     [SerializeField] private GameObject customerPrefab;
-    [SerializeField] private ShaveIcedAsset shaveIcedAsset;
     private bool allowSpawning;
 
     void Awake()

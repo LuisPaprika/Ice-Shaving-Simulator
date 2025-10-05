@@ -8,14 +8,14 @@ public class TrashCan : MonoBehaviour, IInteractable
 
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
 
     }
 
-    public void throwAwayItem(Transform objectPickupPoint)
+    public void throwAwayItem(GameObject objectPickupPoint)
     {
-        StartCoroutine(lerpObject(objectPickupPoint.position, transform.position, objectPickupPoint.GetChild(0)));
+        StartCoroutine(lerpObject(objectPickupPoint.transform.position, transform.position, objectPickupPoint.transform.GetChild(0)));
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)

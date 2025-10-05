@@ -37,10 +37,10 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
         StartCoroutine(giveObject(transform.position, targetPerson.gameObject, transform));
     }
 
-    public void Pickup(Transform objectPickupPoint)
+    public void Pickup(GameObject objectPickupPoint)
     {
-        transform.SetParent(objectPickupPoint);
         StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void Hovered()
@@ -48,7 +48,7 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
         
     }
 
-    public void Interact(Transform objectPickupPoint, PlayerMovement player)
+    public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
 
     }

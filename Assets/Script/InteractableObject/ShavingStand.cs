@@ -12,7 +12,7 @@ public class ShavingStand : MonoBehaviour, IInteractable
 
     }
 
-    public void Interact(Transform transform, PlayerMovement player)
+    public void Interact(GameObject transform, PlayerMovement player)
     {
         EnterShavingMode(player);
     }

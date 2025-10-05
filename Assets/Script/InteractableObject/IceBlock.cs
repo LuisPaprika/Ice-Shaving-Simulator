@@ -7,7 +7,7 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
     [SerializeField] private string interactPrompt;
     private bool inMachine = false;
 
-    public void Interact(Transform transform, PlayerMovement player)
+    public void Interact(GameObject transform, PlayerMovement player)
     {
 
     }
@@ -50,12 +50,12 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
         Debug.Log("Grabbing");
     }
 
-    public void Pickup(Transform objectPickupPoint)
+    public void Pickup(GameObject objectPickupPoint)
     {
         if (!inMachine)
         {
-            transform.SetParent(objectPickupPoint);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+            transform.SetParent(objectPickupPoint.transform);
         }
 
     }

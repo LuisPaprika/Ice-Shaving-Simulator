@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -63,11 +62,27 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.transform.GetChild(0).TryGetComponent<Syrup>(out Syrup syrup))
+                else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Syrup syrup))
                 {
                     if (hitInfo.transform.gameObject.tag == "Unflavored")
                     {
                         shavedIce.AddFlavor(syrup.getFlavor());
+                    }
+                }
+
+                else if (hitInfo.transform.TryGetComponent(out WaffleBatter waffleBatter) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle))
+                {
+                    if (waffleBatter.BattleLeft > 0)
+                    {
+                        waffleBatter.Dip(laddle);
+                    }
+                }
+
+                else if (hitInfo.transform.TryGetComponent(out WaffleCast waffleCast) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle1))
+                {
+                    if (laddle1.isFull)
+                    {
+                        laddle1.putInMachine(waffleCast);
                     }
                 }
 

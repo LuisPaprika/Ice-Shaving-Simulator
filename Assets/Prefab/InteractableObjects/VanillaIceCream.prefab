@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2040228775378654734}
   - component: {fileID: 3636455784260616430}
   m_Layer: 0
-  m_Name: VanillaIce
+  m_Name: VanillaIceCream
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

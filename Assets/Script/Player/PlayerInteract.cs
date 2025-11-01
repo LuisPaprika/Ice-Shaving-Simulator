@@ -72,7 +72,7 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent(out WaffleBatter waffleBatter) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle))
                 {
-                    if (waffleBatter.BattleLeft > 0)
+                    if (waffleBatter.BatterLeft > 0)
                     {
                         waffleBatter.Dip(laddle);
                     }
@@ -80,7 +80,7 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent(out WaffleCast waffleCast) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle1))
                 {
-                    if (laddle1.isFull)
+                    if (laddle1.isFull && !waffleCast.haveBatter)
                     {
                         laddle1.putInMachine(waffleCast);
                     }

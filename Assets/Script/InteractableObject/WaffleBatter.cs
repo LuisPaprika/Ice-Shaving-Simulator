@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WaffleBatter : MonoBehaviour, IInteractable
 {
-    [field: SerializeField] public int BattleLeft { get; private set; } = 5;
+    [field: SerializeField] public int BatterLeft { get; private set; } = 5;
     public void Hovered()
     {
 

@@ -9,10 +9,10 @@ public class WaffleCast : MonoBehaviour, IInteractable
     [SerializeField] private GameObject batter;
     [SerializeField] private GameObject batterPosition;
     [SerializeField] private GameObject wafflePrefab;
-    private bool haveBatter;
+    [field:SerializeField] public bool haveBatter { get; private set; }
     public void Hovered()
     {
-
+        
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
@@ -37,6 +37,7 @@ public class WaffleCast : MonoBehaviour, IInteractable
 
     private IEnumerator CookingWaffle(float duration)
     {
+        timerSlider.SetActive(true);
         timerSlider.GetComponent<Slider>().maxValue = duration;
         timerSlider.GetComponent<Slider>().value = 0f;
         float currentTime = 0;

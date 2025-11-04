@@ -11,7 +11,7 @@ public class IceCream : MonoBehaviour, IInteractable
     private bool interactable = true;
     [SerializeField] private IceCreamFlavor flavor;
 
-    private void FixedUpdate()
+    private void Update()
     {
         isLooked = false;
     }
@@ -19,6 +19,11 @@ public class IceCream : MonoBehaviour, IInteractable
     public void Hovered()
     {
         isLooked = true;
+    }
+
+    public void StopHovered()
+    {
+
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

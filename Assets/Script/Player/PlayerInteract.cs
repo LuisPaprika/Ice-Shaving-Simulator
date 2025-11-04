@@ -8,6 +8,9 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private GameObject objectPickupPoint;
     [SerializeField] private PlayerMovement player;
     private Transform cameraTransform;
+
+    private GameObject lookingObj;
+    private GameObject pastObj;
     void Awake()
     {
         cameraTransform = GetComponentInChildren<Camera>().transform;
@@ -21,9 +24,24 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
             {
+                if(lookingObj != null && lookingObj != hitInfo.transform.gameObject)
+                {
+                    
+                }
+                lookingObj = hitInfo.transform.gameObject;
                 interactable.Hovered();
             }
+
+
         }
+        else
+        {
+            if (lookingObj.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.StopHovered();
+            }
+        }
+
     }
 
     private void InteractHandle(InputAction.CallbackContext context)

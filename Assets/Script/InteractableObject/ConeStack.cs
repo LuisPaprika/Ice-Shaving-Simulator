@@ -10,6 +10,11 @@ public class ConeStack : MonoBehaviour, IInteractable
 
     }
 
+    public void StopHovered()
+    {
+
+    }
+
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         pickupCone(objectPickupPoint);

@@ -78,6 +78,11 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
 
     }
 
+    public void StopHovered()
+    {
+
+    }
+
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
 

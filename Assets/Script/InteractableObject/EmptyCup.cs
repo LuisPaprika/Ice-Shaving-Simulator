@@ -42,7 +42,12 @@ public class EmptyCup : MonoBehaviour, IPickable, IInteractable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)

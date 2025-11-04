@@ -10,7 +10,12 @@ public class CupStack : MonoBehaviour, IInteractable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

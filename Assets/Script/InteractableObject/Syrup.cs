@@ -13,7 +13,12 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
     }
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Pickup(GameObject objectPickupPoint)

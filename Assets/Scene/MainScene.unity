@@ -1601,6 +1601,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VanillaIceCream
       objectReference: {fileID: 0}
+    - target: {fileID: 6159880126693835364, guid: 6d1c640c43496ce4f8df537d6eb3ab15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505476457633323295, guid: 6d1c640c43496ce4f8df537d6eb3ab15, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5330,6 +5338,14 @@ PrefabInstance:
     - target: {fileID: 5461298108862362090, guid: f89c3e8689b635447b0757706988f142, type: 3}
       propertyPath: m_Name
       value: 'ChocolateIceCream '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159880126693835364, guid: f89c3e8689b635447b0757706988f142, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505476457633323295, guid: f89c3e8689b635447b0757706988f142, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

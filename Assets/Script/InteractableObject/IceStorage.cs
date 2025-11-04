@@ -9,7 +9,12 @@ public class IceStorage : MonoBehaviour, IInteractable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

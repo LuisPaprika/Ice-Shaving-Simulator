@@ -42,7 +42,12 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Grab()

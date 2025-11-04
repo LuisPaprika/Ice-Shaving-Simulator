@@ -48,7 +48,12 @@ public class IceShavingMachine : MonoBehaviour, IInteractable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     private IEnumerator ShavingIce(float duration)

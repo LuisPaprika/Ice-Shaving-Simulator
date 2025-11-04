@@ -15,6 +15,11 @@ public class OpeningSign : MonoBehaviour, IInteractable
 
     }
 
+    public void StopHovered()
+    {
+
+    }
+
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         playFlipAnimation();

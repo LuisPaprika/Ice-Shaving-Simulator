@@ -12,6 +12,11 @@ public class ShavingStand : MonoBehaviour, IInteractable
 
     }
 
+    public void StopHovered()
+    {
+
+    }
+
     public void Interact(GameObject transform, PlayerMovement player)
     {
         EnterShavingMode(player);

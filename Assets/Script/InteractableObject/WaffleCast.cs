@@ -12,7 +12,12 @@ public class WaffleCast : MonoBehaviour, IInteractable
     [field:SerializeField] public bool haveBatter { get; private set; }
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

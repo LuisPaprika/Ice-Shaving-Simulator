@@ -45,7 +45,12 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
 
     public void Hovered()
     {
-        
+
+    }
+    
+    public void StopHovered()
+    {
+
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

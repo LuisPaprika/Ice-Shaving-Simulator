@@ -33,10 +33,8 @@ public class IceCream : MonoBehaviour, IInteractable
 
     public void Scoop(GameObject cone)
     {
-        if (interactable)
-        {
-            StartCoroutine(StartScooping(scoopTime, cone));
-        }
+        GameObject scoop = Instantiate(scoopPrefab, transform.position, Quaternion.identity, transform);
+        cone.GetComponent<Cone>().AddScoop(scoop, flavor);
     }
 
     private IEnumerator StartScooping(float duration, GameObject cone)

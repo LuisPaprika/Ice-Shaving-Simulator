@@ -18,31 +18,6 @@ public class PlayerInteract : MonoBehaviour
         player.InputActions.Player.Attack.performed += InteractHandle;
     }
 
-    void FixedUpdate()
-    {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, InteractDistance))
-        {
-            if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
-            {
-                if(lookingObj != null && lookingObj != hitInfo.transform.gameObject)
-                {
-                    
-                }
-                lookingObj = hitInfo.transform.gameObject;
-                interactable.Hovered();
-            }
-
-
-        }
-        else
-        {
-            if (lookingObj.TryGetComponent(out IInteractable interactable))
-            {
-                interactable.StopHovered();
-            }
-        }
-
-    }
 
     private void InteractHandle(InputAction.CallbackContext context)
     {

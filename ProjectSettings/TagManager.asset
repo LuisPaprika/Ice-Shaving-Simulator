@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Flavored
   - Unflavored
-  - EmptyContainer
+  - Container
   layers:
   - Default
   - TransparentFX

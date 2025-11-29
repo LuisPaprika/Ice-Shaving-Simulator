@@ -43,7 +43,7 @@ public class PlayerInteract : MonoBehaviour
                     Transform child = objectPickupPoint.transform.GetChild(0);
                     objectPickupPoint.transform.DetachChildren();
                     child.rotation = Quaternion.identity;
-                    StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform));
+                    StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform, hitInfo.transform));
                 }
 
                 else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
@@ -132,17 +132,18 @@ public class PlayerInteract : MonoBehaviour
         player.InputActions.Player.Disable();
     }
 
-    private IEnumerator PlaceObject(Vector3 startPostion, Vector3 targetPostion, Transform obj)
+    private IEnumerator PlaceObject(Vector3 startPostion, Vector3 targetPostion, Transform placeObj, Transform targetObj)
     {
         float currentTime = 0f;
         float duration = 0.1f;
         while (currentTime < duration)
         {
-            obj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
+            placeObj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
             currentTime += Time.deltaTime;
             yield return null;
         }
-        obj.position = targetPostion;
+        placeObj.position = targetPostion;
+        placeObj.SetParent(targetObj);
     }
 
 }

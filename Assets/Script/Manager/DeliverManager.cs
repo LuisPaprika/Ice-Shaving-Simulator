@@ -18,8 +18,6 @@ public class DeliverManager : MonoBehaviour
             return false;
         }
 
-        
-
         return true;
     }
 }

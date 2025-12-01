@@ -18,6 +18,18 @@ public class DeliverManager : MonoBehaviour
             return false;
         }
 
+        return request.GetComponent<Cone>().chocCount == recieved.GetComponent<Cone>().chocCount &&
+                request.GetComponent<Cone>().vanilCount == recieved.GetComponent<Cone>().vanilCount &&
+                request.GetComponent<Cone>().strawCount == recieved.GetComponent<Cone>().strawCount;
+    }
+
+    public static bool ComparePlate(GameObject request, GameObject recieved)
+    {
+        if (!recieved.GetComponent<Plate>())
+        {
+            return false;
+        }
+
         return true;
     }
 }

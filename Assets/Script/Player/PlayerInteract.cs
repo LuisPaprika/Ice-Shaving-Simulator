@@ -91,6 +91,10 @@ public class PlayerInteract : MonoBehaviour
                         {
                             cone.Give(hitInfo.transform.gameObject);
                         }
+                        else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
+                        {
+                            plate.Give(hitInfo.transform.gameObject);
+                        }
                     }
                 }
 
@@ -143,7 +147,11 @@ public class PlayerInteract : MonoBehaviour
             yield return null;
         }
         placeObj.position = targetPostion;
-        placeObj.SetParent(targetObj);
+
+        if (placeObj.CompareTag("Food") && targetObj.CompareTag("Container"))
+        {
+            placeObj.SetParent(targetObj);
+        }
     }
 
 }

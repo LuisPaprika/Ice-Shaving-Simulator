@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4131928423809266591}
   m_Layer: 0
   m_Name: Laddle
-  m_TagString: Untagged
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

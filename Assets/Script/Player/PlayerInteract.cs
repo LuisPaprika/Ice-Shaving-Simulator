@@ -38,12 +38,33 @@ public class PlayerInteract : MonoBehaviour
             }
             else //Holding Something
             {
+
                 if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Placable")) //Place Item
                 {
                     Transform child = objectPickupPoint.transform.GetChild(0);
-                    objectPickupPoint.transform.DetachChildren();
-                    child.rotation = Quaternion.identity;
-                    StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform, hitInfo.transform));
+                    if (!child.transform.CompareTag("Tools"))
+                    {
+                        objectPickupPoint.transform.DetachChildren();
+                        child.rotation = Quaternion.identity;
+                        if (hitInfo.transform.CompareTag("Container"))
+                        {
+                            StartCoroutine(PutObjectInContainer(child.position, hitInfo.point, child.transform, hitInfo.transform));
+                        }
+                        else
+                        {
+                            StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform, hitInfo.transform));
+                        }
+                    }
+                    else
+                    {
+                        if (!hitInfo.transform.CompareTag("Container"))
+                        {
+                            objectPickupPoint.transform.DetachChildren();
+                            child.rotation = Quaternion.identity;
+                            StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform, hitInfo.transform));
+                        }
+                    }
+                    
                 }
 
                 else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
@@ -147,12 +168,22 @@ public class PlayerInteract : MonoBehaviour
             yield return null;
         }
         placeObj.position = targetPostion;
+    }
 
-        if (targetObj.transform.CompareTag("Container"))
+    private IEnumerator PutObjectInContainer(Vector3 startPostion, Vector3 targetPostion, Transform placeObj, Transform targetObj)
+    {
+        float currentTime = 0f;
+        float duration = 0.1f;
+        while (currentTime < duration)
         {
-            placeObj.SetParent(targetObj);
-            targetObj.GetComponent<Plate>().UpdateIngredient();
+            placeObj.position = Vector3.Lerp(startPostion, targetPostion, currentTime / duration);
+            currentTime += Time.deltaTime;
+            yield return null;
         }
+        placeObj.position = targetPostion;
+
+        placeObj.SetParent(targetObj);
+        targetObj.GetComponent<Plate>().UpdateIngredient();
     }
 
 }

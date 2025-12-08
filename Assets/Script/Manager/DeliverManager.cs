@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliverManager : MonoBehaviour
@@ -28,6 +29,22 @@ public class DeliverManager : MonoBehaviour
         if (!recieved.GetComponent<Plate>())
         {
             return false;
+        }
+
+        if (recieved.transform.childCount != request.transform.childCount)
+        {
+            return false;
+        }
+
+        foreach(Transform child in request.transform)
+        {
+            foreach(Transform child2 in recieved.transform)
+            {
+                if(child.GetComponent<Ingredient>().ingredientSO != child2.GetComponent<Ingredient>().ingredientSO)
+                {
+                    return false;
+                }
+            }
         }
 
         return true;

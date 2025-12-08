@@ -4082,6 +4082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SyrubStrawberry
       objectReference: {fileID: 0}
+    - target: {fileID: 6343833870702903420, guid: 794609c96b61f7d4194626341c2ca736, type: 3}
+      propertyPath: m_TagString
+      value: Tools
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

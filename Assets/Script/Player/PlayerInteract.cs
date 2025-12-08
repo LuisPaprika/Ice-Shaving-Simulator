@@ -143,7 +143,12 @@ public class PlayerInteract : MonoBehaviour
             yield return null;
         }
         placeObj.position = targetPostion;
-        placeObj.SetParent(targetObj);
+
+        if (targetObj.transform.CompareTag("Container"))
+        {
+            placeObj.SetParent(targetObj);
+            targetObj.GetComponent<Plate>().UpdateIngredient();
+        }
     }
 
 }

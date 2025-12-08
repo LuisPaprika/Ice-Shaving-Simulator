@@ -21,5 +21,5 @@ public class Waffle : MonoBehaviour, IPickable
         }
         obj.position = targetPostion.transform.position;
     }
-    
+
 }

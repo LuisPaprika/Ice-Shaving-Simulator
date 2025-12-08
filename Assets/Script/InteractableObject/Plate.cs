@@ -1,8 +1,24 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Plate : MonoBehaviour, IPickable
 {
+    [SerializeField] private List<ScriptableObject> ingredients;
+
+    public void UpdateIngredient()
+    {
+        ingredients.Clear();
+        foreach(Transform child in transform)
+        {
+            if(child.TryGetComponent<Ingredient>(out Ingredient ingredient))
+            {
+                ingredients.Add(ingredient.ingredientSO);
+            }
+        }
+    }
+
     public void Pickup(GameObject objectPickupPoint)
     {
         StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));

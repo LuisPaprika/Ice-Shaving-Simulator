@@ -980,6 +980,7 @@ MonoBehaviour:
   - {fileID: 155247439484499887, guid: fcf34fda27ce2c04d8050735f9719948, type: 3}
   - {fileID: 3112484462364339143, guid: afa2a3b77e2d70e4daf1923232bd4292, type: 3}
   - {fileID: 7053057171359674594, guid: 1c8b88a0a6a948c488ca93beebda7f8c, type: 3}
+  - {fileID: 1043924095776980946, guid: 0d8f924499fc23948a34b5026c037b32, type: 3}
 --- !u!1001 &1129893720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4309,6 +4310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776388419404255249, guid: 0d8f924499fc23948a34b5026c037b32, type: 3}
+      propertyPath: ingredientSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b946e3defdfd0b4780f9aa9f87c7ed8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

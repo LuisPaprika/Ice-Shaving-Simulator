@@ -131,9 +131,9 @@ MonoBehaviour:
   - {fileID: 992207162289084863}
   - {fileID: 889903442514678365}
   - {fileID: 1034789456183118571}
-  chocCount: 0
-  vanilCount: 0
-  strawCount: 1
+  <chocCount>k__BackingField: 0
+  <vanilCount>k__BackingField: 0
+  <strawCount>k__BackingField: 1
 --- !u!1 &889903442514678365
 GameObject:
   m_ObjectHideFlags: 0

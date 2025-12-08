@@ -91,6 +91,10 @@ public class PlayerInteract : MonoBehaviour
                         {
                             cone.Give(hitInfo.transform.gameObject);
                         }
+                        else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
+                        {
+                            plate.Give(hitInfo.transform.gameObject);
+                        }
                     }
                 }
 

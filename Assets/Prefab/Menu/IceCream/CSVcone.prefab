@@ -551,6 +551,6 @@ MonoBehaviour:
   - {fileID: 5199118156990686233}
   - {fileID: 4844566308581422297}
   - {fileID: 2056009972366384703}
-  chocCount: 1
-  vanilCount: 1
-  strawCount: 1
+  <chocCount>k__BackingField: 1
+  <vanilCount>k__BackingField: 1
+  <strawCount>k__BackingField: 1

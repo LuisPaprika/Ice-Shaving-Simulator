@@ -49,6 +49,22 @@ public class Customer : MonoBehaviour
                 Exit();
             }
         }
+        else if (request.GetComponent<Plate>())
+        {
+            if (DeliverManager.ComparePlate(request, recievedItem))
+            {
+                Interactable = false;
+                Instantiate(correctParticle, transform.position, Quaternion.identity);
+                WalletManager.SetMoney(WalletManager.Money + 50);
+                Exit();
+            }
+            else
+            {
+                Interactable = false;
+                Instantiate(wrongParticle, transform.position, Quaternion.identity);
+                Exit();
+            }
+        }
     }
 
     public void StartWaiting()

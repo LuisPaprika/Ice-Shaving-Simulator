@@ -53,7 +53,6 @@ public class CustomerSpawner : MonoBehaviour
 
                 GameObject customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
                 spawnedCustomer++;
-                Debug.Log(spawnedCustomer + " " + customerLimitPerDay);
                 QueueManager.CustomerQueue.Enqueue(customer);
 
                 Customer script = customer.GetComponent<Customer>();

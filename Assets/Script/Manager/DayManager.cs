@@ -16,7 +16,11 @@ public class DayManager : MonoBehaviour
         }
 
         instance = this;
-        Day = 1;
+    }
+
+    private void Start()
+    {
+        SetDay(1);
     }
 
     public static void SetDay(int amount)

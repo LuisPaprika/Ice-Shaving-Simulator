@@ -3684,7 +3684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7160810955637565898, guid: c21a37497f3499749b4e7ff8f151f9c9, type: 3}
       propertyPath: customerLimitGrowth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7377537896895686084, guid: c21a37497f3499749b4e7ff8f151f9c9, type: 3}
       propertyPath: m_LocalPosition.x

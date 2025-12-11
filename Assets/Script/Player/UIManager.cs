@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dayText;
 
     [SerializeField] private TextMeshProUGUI openCloseText;
+    [SerializeField] private GameObject anouncingText;
     [SerializeField] private Image crosshair;
     void Awake()
     {
@@ -20,6 +22,15 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    public IEnumerator ShowAnouncingText(string text)
+    {
+        anouncingText.SetActive(true);
+        anouncingText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        yield return new WaitForSeconds(3);
+        anouncingText.SetActive(false);
+        anouncingText.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 
     public void SetMoneyText(string text)

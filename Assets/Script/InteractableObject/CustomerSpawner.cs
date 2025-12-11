@@ -45,20 +45,25 @@ public class CustomerSpawner : MonoBehaviour
     private IEnumerator SpawnCustomer(int startDelay)
     {
         yield return new WaitForSeconds(startDelay);
-        while (allowSpawning && QueueManager.customerCount < 4 && (spawnedCustomer <= customerLimitPerDay))
+        while (allowSpawning)
         {
-            QueueManager.SetCustomerCount(QueueManager.customerCount + 1);
-    
-            GameObject customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
-            spawnedCustomer++;
-            Debug.Log(spawnedCustomer + " " + customerLimitPerDay);
-            QueueManager.CustomerQueue.Enqueue(customer);
+            while (QueueManager.customerCount < 4 && (spawnedCustomer <= customerLimitPerDay))
+            {
+                QueueManager.SetCustomerCount(QueueManager.customerCount + 1);
 
-            Customer script = customer.GetComponent<Customer>();
-            script.Init(OrderAssets.Instance.GetRandomOrder(), waitingTime, QueueManager.Positions[QueueManager.customerCount].transform);
+                GameObject customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
+                spawnedCustomer++;
+                Debug.Log(spawnedCustomer + " " + customerLimitPerDay);
+                QueueManager.CustomerQueue.Enqueue(customer);
 
-            yield return new WaitForSeconds(spawnInitial);
+                Customer script = customer.GetComponent<Customer>();
+                script.Init(OrderAssets.Instance.GetRandomOrder(), waitingTime, QueueManager.Positions[QueueManager.customerCount].transform);
+
+                yield return new WaitForSeconds(spawnInitial);
+            }
+            yield return null;
         }
+
     }
 
     void OnDestroy()

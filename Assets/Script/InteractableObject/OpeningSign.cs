@@ -6,9 +6,14 @@ using UnityEngine;
 public class OpeningSign : MonoBehaviour, IInteractable
 {
     [SerializeField] private Animator flipAnimator;
-    private bool isOpen = false;
+    [field: SerializeField] public static bool isOpen { get; private set; }
     public static event Action onOpenStore;
     public static event Action onCloseStore;
+
+    void Awake()
+    {
+        isOpen = false;
+    }
 
     public void Hovered()
     {

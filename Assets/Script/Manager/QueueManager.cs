@@ -28,6 +28,5 @@ public class QueueManager : MonoBehaviour
     public static void SetCustomerCount(int count)
     {
         customerCount = count;
-        Debug.Log(customerCount);
     }
 }

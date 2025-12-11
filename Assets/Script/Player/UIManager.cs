@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dayText;
 
     [SerializeField] private TextMeshProUGUI openCloseText;
-    [SerializeField] private GameObject anouncingText;
+    [SerializeField] private TextMeshProUGUI anouncingText;
+    [SerializeField] private GameObject panel;
     [SerializeField] private Image crosshair;
     void Awake()
     {
@@ -26,11 +27,11 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ShowAnouncingText(string text)
     {
-        anouncingText.SetActive(true);
-        anouncingText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        panel.SetActive(true);
+        anouncingText.text = text;
         yield return new WaitForSeconds(3);
-        anouncingText.SetActive(false);
-        anouncingText.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        panel.SetActive(false);
+        anouncingText.text = "";
     }
 
     public void SetMoneyText(string text)

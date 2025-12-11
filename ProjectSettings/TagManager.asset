@@ -8,6 +8,7 @@ TagManager:
   - Unflavored
   - Container
   - Tools
+  - Stacks
   layers:
   - Default
   - TransparentFX

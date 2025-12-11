@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 {
     [field: SerializeField] public static UIManager Instance { get; private set; }
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI dayText;
+
     [SerializeField] private TextMeshProUGUI openCloseText;
     [SerializeField] private Image crosshair;
     void Awake()
@@ -23,6 +25,11 @@ public class UIManager : MonoBehaviour
     public void SetMoneyText(string text)
     {
         moneyText.text = text + " $";
+    }
+
+    public void SetDayText(string text)
+    {
+        dayText.text = "Day " + text;
     }
 
     public void ToggleOpenCloseText(bool isOpen)

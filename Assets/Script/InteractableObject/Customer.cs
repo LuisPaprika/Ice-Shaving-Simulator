@@ -15,7 +15,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private ParticleSystem wrongParticle;
 
 
-    public void Deliver(GameObject recievedItem)
+    public void GetDelivered(GameObject recievedItem)
     {
         if (request.GetComponent<ShavedIce>())
         {

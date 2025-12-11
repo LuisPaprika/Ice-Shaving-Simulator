@@ -29,7 +29,7 @@ public class Plate : MonoBehaviour, IPickable
     {
         if (gameObject.GetComponentInChildren<Waffle>())
         {
-            targetPerson.GetComponent<Customer>().Deliver(gameObject);
+            targetPerson.GetComponent<Customer>().GetDelivered(gameObject);
             StartCoroutine(giveObject(transform.position, targetPerson.gameObject, transform));
         }
     }

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlateStack : MonoBehaviour, IInteractable
+public class PlateStack : MonoBehaviour, IInteractable, IPickable
 {
     [SerializeField] private GameObject emptyPlatePrefab;
     private int currentPlate = 8;
@@ -14,6 +14,12 @@ public class PlateStack : MonoBehaviour, IInteractable
     public void StopHovered()
     {
 
+    }
+
+    public void Pickup(GameObject objectPickupPoint)
+    {
+        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
+        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

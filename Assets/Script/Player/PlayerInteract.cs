@@ -16,10 +16,10 @@ public class PlayerInteract : MonoBehaviour
         cameraTransform = GetComponentInChildren<Camera>().transform;
 
         player.InputActions.Player.Attack.performed += InteractHandle;
+        player.InputActions.Player.Pickup.performed += PickupObject;
     }
 
-
-    private void InteractHandle(InputAction.CallbackContext context)
+    private void PickupObject(InputAction.CallbackContext context)
     {
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, InteractDistance))
         {
@@ -29,8 +29,18 @@ public class PlayerInteract : MonoBehaviour
                 {
                     pickable.Pickup(objectPickupPoint);
                 }
+            }
+        }
+    }
 
-                else if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
+    private void InteractHandle(InputAction.CallbackContext context)
+    {
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, InteractDistance))
+        {
+            if (objectPickupPoint.transform.childCount == 0) //Empty Hand
+            {
+
+                if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
                     interactable.Interact(objectPickupPoint, player);
                 }
@@ -64,7 +74,7 @@ public class PlayerInteract : MonoBehaviour
                             StartCoroutine(PlaceObject(child.position, hitInfo.point, child.transform, hitInfo.transform));
                         }
                     }
-                    
+
                 }
 
                 else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))

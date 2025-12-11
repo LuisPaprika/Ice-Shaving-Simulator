@@ -70,7 +70,7 @@ public class PlayerInteract : MonoBehaviour
                 else if (hitInfo.transform.TryGetComponent(out TrashCan trashCan))
                 {
                     Transform holdingItem = objectPickupPoint.transform.GetChild(0);
-                    if (!holdingItem.GetComponent<Syrup>())
+                    if (!holdingItem.CompareTag("Tools"))
                     {
                         trashCan.throwAwayItem(objectPickupPoint);
                     }

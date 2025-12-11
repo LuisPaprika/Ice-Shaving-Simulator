@@ -3,7 +3,7 @@ using UnityEngine;
 public class HoveringInteractable : MonoBehaviour
 {
     [SerializeField] private PlayerInteract playerInteract;
-    void Update()
+    void FixedUpdate()
     {
         RaycastHitHandle();
     }
@@ -12,7 +12,8 @@ public class HoveringInteractable : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
         {
-            if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
+            if (hitInfo.transform.TryGetComponent<IInteractable>(out IInteractable interactable) ||
+                hitInfo.transform.TryGetComponent<IPickable>(out IPickable pickable))
             {
                 UIManager.Instance.ChangeCrosshair(Color.black);
             }

@@ -26,8 +26,19 @@ public class DayManager : MonoBehaviour
 
     public static void SetDay(int amount)
     {
+        IncomeManager.Instance.ResetSalesCount();
         Day = amount;
-        onDaySet.Invoke(Day);
+        onDaySet?.Invoke(Day);
+        UIManager.Instance.SetDayText(Day.ToString());
+    }
+
+    public void GoNextDay()
+    {
+        UIManager.Instance.DisableSalesResult();
+
+        IncomeManager.Instance.ResetSalesCount();
+        Day++;
+        onDaySet?.Invoke(Day);
         UIManager.Instance.SetDayText(Day.ToString());
     }
 }

@@ -198,7 +198,6 @@ public class PlayerInteract : MonoBehaviour
         placeObj.position = targetPostion;
 
         placeObj.SetParent(targetObj);
-        targetObj.GetComponent<Plate>().UpdateIngredient();
     }
 
 }

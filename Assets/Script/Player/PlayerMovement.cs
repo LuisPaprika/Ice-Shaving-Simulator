@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [field: SerializeField] public static PlayerMovement Instance { get; private set; }
     [SerializeField] private float moveSpeed;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float mouseSensitivity;
@@ -12,9 +13,19 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraTransform;
     private CharacterController cc;
     public InputSystem_Actions InputActions { get; private set; }
+    [field: SerializeField] public bool isMovementDisabled {get; private set;}
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         InputActions = new InputSystem_Actions();
         Init();
     }
@@ -32,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
-        HandleLook();
+        if (!isMovementDisabled)
+        {
+            HandleMovement();
+            HandleLook();
+        }
     }
 
     private void HandleMovement()
@@ -63,6 +77,27 @@ public class PlayerMovement : MonoBehaviour
 
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    public void EnablingMovement(bool value)
+    {
+        isMovementDisabled = !value;
+        EnablingCursor(!value);
+    }
+
+    private void EnablingCursor(bool value)
+    {
+        if (value)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
     }
 
     void OnDestroy()

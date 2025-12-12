@@ -47,7 +47,7 @@ public class CustomerSpawner : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
         while (allowSpawning)
         {
-            while (QueueManager.customerCount < 4 && (spawnedCustomer <= customerLimitPerDay))
+            while (QueueManager.customerCount < 4 && (spawnedCustomer <= customerLimitPerDay) && allowSpawning)
             {
                 QueueManager.SetCustomerCount(QueueManager.customerCount + 1);
 

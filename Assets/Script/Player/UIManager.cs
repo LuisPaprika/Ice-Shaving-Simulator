@@ -11,7 +11,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI openCloseText;
     [SerializeField] private TextMeshProUGUI anouncingText;
-    [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject anouncingTextPanel;
+    [SerializeField] private GameObject salesPanel;
+    [SerializeField] private TextMeshProUGUI salesMenuPrefab;
     [SerializeField] private Image crosshair;
     void Awake()
     {
@@ -27,11 +29,11 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ShowAnouncingText(string text)
     {
-        panel.SetActive(true);
-        anouncingText.text = text;
+        anouncingTextPanel.SetActive(true);
+        anouncingTextPanel.GetComponentInChildren<TextMeshProUGUI>().text = text;
         yield return new WaitForSeconds(3);
-        panel.SetActive(false);
-        anouncingText.text = "";
+        anouncingTextPanel.SetActive(false);
+        anouncingTextPanel.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 
     public void SetMoneyText(string text)
@@ -60,5 +62,35 @@ public class UIManager : MonoBehaviour
     public void ChangeCrosshair(Color color)
     {
         crosshair.color = color;
+    }
+
+    public void CreateSales()
+    {
+        PlayerMovement.Instance.EnablingMovement(false);
+        salesPanel.SetActive(true);
+        foreach(ScriptableObject so in IncomeManager.Instance.Sales)
+        {
+            MenuSO menuSO = so as MenuSO;
+            if(menuSO != null)
+            {
+                if(menuSO.sales > 0)
+                {
+                    TextMeshProUGUI text = Instantiate(salesMenuPrefab, salesPanel.transform.GetChild(0).transform);
+                    text.text = menuSO.name + "        " + "x" + menuSO.sales + "        = " + menuSO.sales*menuSO.price;
+                }
+            }
+        }
+    }
+
+    public void DisableSalesResult()
+    {
+        PlayerMovement.Instance.EnablingMovement(true);
+
+        foreach(Transform child in salesPanel.transform.GetChild(0).transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        salesPanel.SetActive(false);
     }
 }

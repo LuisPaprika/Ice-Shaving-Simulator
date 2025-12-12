@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +14,12 @@ public class Customer : MonoBehaviour
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;
     [SerializeField] private ParticleSystem correctParticle;
     [SerializeField] private ParticleSystem wrongParticle;
+    [SerializeField] private int SingleIceCreamPrice = 25;
+    [SerializeField] private int NapoleanIceCreamPrice = 70;
+    [SerializeField] private int ShavedIcePrice = 50;
+    [SerializeField] private int SingleWafflePrice = 100;
+    [SerializeField] private int DoubleWafflePrice = 150;
+
 
 
     public void GetDelivered(GameObject recievedItem)
@@ -23,7 +30,8 @@ public class Customer : MonoBehaviour
             {
                 Interactable = false;
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
-                WalletManager.SetMoney(WalletManager.Money + 50);
+                WalletManager.SetMoney(WalletManager.Money + ShavedIcePrice);
+                IncomeManager.Instance.AddSalesCount("Shaved Ice", 1);
                 Exit();
             }
             else
@@ -39,7 +47,18 @@ public class Customer : MonoBehaviour
             {
                 Interactable = false;
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
-                WalletManager.SetMoney(WalletManager.Money + 50);
+
+                if (request.GetComponent<Cone>().currentScoop > 1)
+                {
+                    WalletManager.SetMoney(WalletManager.Money + NapoleanIceCreamPrice);
+                    IncomeManager.Instance.AddSalesCount("Napolean Ice Cream", 1);
+                }
+                else if (request.GetComponent<Cone>().currentScoop < 1)
+                {
+                    WalletManager.SetMoney(WalletManager.Money + SingleIceCreamPrice);
+                    IncomeManager.Instance.AddSalesCount("Single Scoop Ice Cream", 1);
+                }
+
                 Exit();
             }
             else
@@ -55,7 +74,19 @@ public class Customer : MonoBehaviour
             {
                 Interactable = false;
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
-                WalletManager.SetMoney(WalletManager.Money + 50);
+
+                if (request.GetComponent<Plate>().transform.childCount > 1)
+                {
+                    WalletManager.SetMoney(WalletManager.Money + DoubleWafflePrice);
+                    IncomeManager.Instance.AddSalesCount("Double Waffle", 1);
+                }
+                else if (request.GetComponent<Plate>().transform.childCount == 1)
+                {
+                    WalletManager.SetMoney(WalletManager.Money + SingleWafflePrice);
+                    IncomeManager.Instance.AddSalesCount("Single Waffle", 1);
+                }
+
+
                 Exit();
             }
             else

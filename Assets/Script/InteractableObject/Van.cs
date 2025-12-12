@@ -6,7 +6,7 @@ public class Van : MonoBehaviour, IInteractable
     {
 
     }
-    
+
     public void StopHovered()
     {
 
@@ -14,15 +14,18 @@ public class Van : MonoBehaviour, IInteractable
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
-        if (!OpeningSign.isOpen)
+        if (!PlayerMovement.Instance.isMovementDisabled)
         {
-            DayManager.SetDay(DayManager.Day + 1);
+            if (!OpeningSign.isOpen)
+            {
+                UIManager.Instance.CreateSales();
+            }
+            else
+            {
+                StartCoroutine(UIManager.Instance.ShowAnouncingText("I should close the store first"));
+            }
         }
-        else
-        {
-            StartCoroutine(UIManager.Instance.ShowAnouncingText("I should close the store first"));
-        }
-        
+
     }
 
 }

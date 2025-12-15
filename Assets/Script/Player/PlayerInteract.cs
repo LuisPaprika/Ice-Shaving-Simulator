@@ -27,8 +27,8 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Stacks"))
                 {
-                    if(hitInfo.collider.TryGetComponent(out IPickable pickable))
-                    pickable.Pickup(objectPickupPoint);
+                    if (hitInfo.collider.TryGetComponent(out IPickable pickable))
+                        pickable.Pickup(objectPickupPoint);
                 }
             }
         }
@@ -115,6 +115,17 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
+                {
+                    if (hitInfo.transform.TryGetComponent(out PlateStack plateStack))
+                    {
+                        if (plateStack.currentPlate < plateStack.maxPlate)
+                        {
+                            plate.Stack(plateStack.gameObject);
+                        }
+                    }
+                }
+
                 else if (hitInfo.transform.TryGetComponent(out Customer customer))
                 {
                     if (customer.Interactable)
@@ -127,9 +138,9 @@ public class PlayerInteract : MonoBehaviour
                         {
                             cone.Give(hitInfo.transform.gameObject);
                         }
-                        else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
+                        else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate1))
                         {
-                            plate.Give(hitInfo.transform.gameObject);
+                            plate1.Give(hitInfo.transform.gameObject);
                         }
                     }
                 }
@@ -141,7 +152,16 @@ public class PlayerInteract : MonoBehaviour
                     {
                         emptyCup.putInMachine(hitInfo.transform.gameObject);
                     }
+
+                    else if (hitInfo.transform.TryGetComponent(out CupStack cupStack))
+                    {
+                        if (cupStack.currentCup < cupStack.maxCup)
+                        {
+                            emptyCup.Stack(cupStack.gameObject);
+                        }
+                    }
                 }
+
 
                 else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out IceBlock iceBlock))
                 {
@@ -159,6 +179,14 @@ public class PlayerInteract : MonoBehaviour
                         if (cone.currentScoop < 3)
                         {
                             iceCream.Scoop(cone.gameObject);
+                        }
+                    }
+
+                    else if (hitInfo.transform.TryGetComponent(out ConeStack coneStack))
+                    {
+                        if (coneStack.currentCone < coneStack.maxCone)
+                        {
+                            cone.Stack(coneStack.gameObject);
                         }
                     }
                 }

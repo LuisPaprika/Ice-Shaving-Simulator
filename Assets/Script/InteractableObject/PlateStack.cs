@@ -4,7 +4,12 @@ using UnityEngine;
 public class PlateStack : MonoBehaviour, IInteractable, IPickable
 {
     [SerializeField] private GameObject emptyPlatePrefab;
-    private int currentPlate = 8;
+    [field: SerializeField] public int maxPlate {get; private set;} = 8;
+    [field: SerializeField] public int currentPlate {get; private set;}
+    void Awake()
+    {
+        currentPlate = maxPlate;
+    }
 
     public void Hovered()
     {
@@ -14,6 +19,11 @@ public class PlateStack : MonoBehaviour, IInteractable, IPickable
     public void StopHovered()
     {
 
+    }
+
+    public void AddToStack()
+    {
+        currentPlate++;
     }
 
     public void Pickup(GameObject objectPickupPoint)
@@ -31,6 +41,7 @@ public class PlateStack : MonoBehaviour, IInteractable, IPickable
     {
         if (currentPlate > 0)
         {
+            currentPlate--;
             GameObject emptyCup = Instantiate(emptyPlatePrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }

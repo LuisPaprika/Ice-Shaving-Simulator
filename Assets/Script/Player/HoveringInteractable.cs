@@ -13,7 +13,7 @@ public class HoveringInteractable : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
         {
             if (hitInfo.transform.TryGetComponent<IInteractable>(out IInteractable interactable) ||
-                hitInfo.transform.TryGetComponent<IPickable>(out IPickable pickable))
+                hitInfo.transform.TryGetComponent<Pickable>(out Pickable pickable))
             {
                 UIManager.Instance.ChangeCrosshair(Color.black);
             }

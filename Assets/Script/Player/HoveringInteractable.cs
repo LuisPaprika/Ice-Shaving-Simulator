@@ -3,7 +3,9 @@ using UnityEngine;
 public class HoveringInteractable : MonoBehaviour
 {
     [SerializeField] private PlayerInteract playerInteract;
-    void FixedUpdate()
+    private CanvasDisplay tempScript;
+    private GameObject lookedObject;
+    void Update()
     {
         RaycastHitHandle();
     }
@@ -12,8 +14,26 @@ public class HoveringInteractable : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hitInfo, playerInteract.InteractDistance))
         {
-            if (hitInfo.transform.TryGetComponent<IInteractable>(out IInteractable interactable) ||
-                hitInfo.transform.TryGetComponent<Pickable>(out Pickable pickable))
+            if (lookedObject != null && lookedObject != hitInfo.collider.gameObject)
+            {
+                if (tempScript)
+                {
+                    tempScript.HideText();
+                }
+            }
+            else if (lookedObject == hitInfo.collider.gameObject)
+            {
+                if (hitInfo.collider.gameObject.TryGetComponent(out CanvasDisplay canvasDisplay))
+                {
+                    tempScript = canvasDisplay;
+                    canvasDisplay.DisplayText();
+                }
+            }
+
+            lookedObject = hitInfo.collider.gameObject;
+
+            if (hitInfo.transform.TryGetComponent(out IInteractable interactable) ||
+                hitInfo.transform.TryGetComponent(out Pickable pickable))
             {
                 UIManager.Instance.ChangeCrosshair(Color.black);
             }
@@ -21,9 +41,21 @@ public class HoveringInteractable : MonoBehaviour
             {
                 UIManager.Instance.ChangeCrosshair(Color.white);
             }
+
+
         }
         else
         {
+            if (lookedObject != null)
+            {
+                if (tempScript)
+                {
+                    tempScript.HideText();
+                }
+                
+                lookedObject = null;
+            }
+
             UIManager.Instance.ChangeCrosshair(Color.white);
         }
     }

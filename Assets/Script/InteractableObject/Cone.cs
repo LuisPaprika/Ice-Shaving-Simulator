@@ -33,6 +33,12 @@ public class Cone : Pickable, IInteractable
         }
     }
 
+    public void Stack(GameObject targetStack)
+    {
+        targetStack.GetComponent<ConeStack>().AddToStack();
+        StartCoroutine(stackObject(transform.position, targetStack, transform));
+    }
+
     public void Give(GameObject targetPerson)
     {
         targetPerson.GetComponent<Customer>().GetDelivered(gameObject);
@@ -63,6 +69,19 @@ public class Cone : Pickable, IInteractable
             yield return null;
         }
         obj.position = targetPostion.transform.position;
+        Destroy(obj.gameObject);
+    }
+
+    private IEnumerator stackObject(Vector3 startPostion, GameObject targetPostion, Transform obj)
+    {
+        float currentTime = 0f;
+        float duration = 0.1f;
+        while (currentTime < duration)
+        {
+            obj.position = Vector3.Lerp(startPostion, targetPostion.transform.position, currentTime / duration);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
         Destroy(obj.gameObject);
     }
 

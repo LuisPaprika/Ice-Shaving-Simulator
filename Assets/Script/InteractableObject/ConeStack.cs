@@ -4,7 +4,12 @@ using UnityEngine;
 public class ConeStack : Pickable, IInteractable
 {
     [SerializeField] private GameObject conePrefab;
-    private int currentCone = 5;
+    [field: SerializeField] public int maxCone {get; private set;} = 5;
+    [field: SerializeField] public int currentCone {get; private set;}
+    void Awake()
+    {
+        currentCone = maxCone;
+    }
     public void Hovered()
     {
 
@@ -20,10 +25,16 @@ public class ConeStack : Pickable, IInteractable
         pickupCone(objectPickupPoint);
     }
 
+    public void AddToStack()
+    {
+        currentCone++;
+    }
+
     private void pickupCone(GameObject objectPickupPoint)
     {
         if (currentCone > 0)
         {
+            currentCone--;
             GameObject emptyCup = Instantiate(conePrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }

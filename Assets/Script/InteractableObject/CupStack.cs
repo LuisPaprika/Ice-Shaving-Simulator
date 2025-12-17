@@ -6,7 +6,12 @@ public class CupStack : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private GameObject emptyCupPrefab;
-    private int currentCup = 5;
+    [field: SerializeField] public int maxCup {get; private set;} = 5;
+    [field: SerializeField] public int currentCup {get; private set;}
+    void Awake()
+    {
+        currentCup = maxCup;
+    }
 
     public void Hovered()
     {
@@ -27,10 +32,16 @@ public class CupStack : Pickable, IInteractable
     {
         if (currentCup > 0)
         {
+            currentCup--;
             GameObject emptyCup = Instantiate(emptyCupPrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }
 
+    }
+
+    public void AddToStack()
+    {
+        currentCup++;
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)

@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Plate : MonoBehaviour, IPickable
+public class Plate : Pickable
 {
-
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
-    }
-
     public void Give(GameObject targetPerson)
     {
         if (gameObject.GetComponentInChildren<Waffle>())

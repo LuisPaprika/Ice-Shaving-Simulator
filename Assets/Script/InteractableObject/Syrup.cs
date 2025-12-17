@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Syrup : MonoBehaviour, IInteractable, IPickable
+public class Syrup : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private ShavedIceFlavor flavor;
@@ -19,12 +19,6 @@ public class Syrup : MonoBehaviour, IInteractable, IPickable
     public void StopHovered()
     {
 
-    }
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
     }
 
     public ShavedIceFlavor getFlavor()

@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
+public class IceBlock : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     private bool inMachine = false;
@@ -55,7 +54,7 @@ public class IceBlock : MonoBehaviour, IPickable, IInteractable, IGrabable
         Debug.Log("Grabbing");
     }
 
-    public void Pickup(GameObject objectPickupPoint)
+    public override void Pickup(GameObject objectPickupPoint)
     {
         if (!inMachine)
         {

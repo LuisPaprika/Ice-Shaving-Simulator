@@ -2,14 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EmptyCup : MonoBehaviour, IPickable, IInteractable
+public class EmptyCup : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
-    }
 
     public void putInMachine(GameObject targetMachine)
     {

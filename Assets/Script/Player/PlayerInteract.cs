@@ -40,7 +40,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (objectPickupPoint.transform.childCount == 0) //Empty Hand
             {
-                if (hitInfo.collider.TryGetComponent(out IPickable pickable) && !hitInfo.transform.CompareTag("Stacks"))
+                if (hitInfo.collider.TryGetComponent(out Pickable pickable) && !hitInfo.transform.CompareTag("Stacks"))
                 {
                     pickable.Pickup(objectPickupPoint);
                 }

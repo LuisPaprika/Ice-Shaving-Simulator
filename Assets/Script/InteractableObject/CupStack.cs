@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CupStack : MonoBehaviour, IInteractable, IPickable
+public class CupStack : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private GameObject emptyCupPrefab;
@@ -16,12 +16,6 @@ public class CupStack : MonoBehaviour, IInteractable, IPickable
     public void StopHovered()
     {
 
-    }
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

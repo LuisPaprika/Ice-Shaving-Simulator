@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Cone : MonoBehaviour, IPickable, IInteractable
+public class Cone : Pickable, IInteractable
 {
     [field: SerializeField] public int currentScoop { get; private set; } = 0;
     [SerializeField] private GameObject[] scoopPos = new GameObject[3];
@@ -9,12 +9,6 @@ public class Cone : MonoBehaviour, IPickable, IInteractable
     [field: SerializeField] public int chocCount { get; private set; } = 0;
     [field: SerializeField] public int vanilCount { get; private set; } = 0;
     [field: SerializeField] public int strawCount { get; private set; } = 0;
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
-    }
 
     public void AddScoop(GameObject scoop, IceCreamFlavor flavor)
     {

@@ -1,15 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Laddle : MonoBehaviour, IPickable
+public class Laddle : Pickable
 {
     [SerializeField] private GameObject batter;
     [field:SerializeField] public bool isFull { get; private set; }
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
-    }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)
     {

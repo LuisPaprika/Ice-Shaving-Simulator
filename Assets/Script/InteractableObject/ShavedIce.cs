@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public class ShavedIce : MonoBehaviour, IPickable, IInteractable
+public class ShavedIce : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
     [SerializeField] private ShaveIcedAsset shaveIcedAsset;
@@ -35,12 +35,6 @@ public class ShavedIce : MonoBehaviour, IPickable, IInteractable
     {
         targetPerson.GetComponent<Customer>().GetDelivered(gameObject);
         StartCoroutine(giveObject(transform.position, targetPerson.gameObject, transform));
-    }
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void Hovered()

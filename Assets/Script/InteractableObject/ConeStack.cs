@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ConeStack : MonoBehaviour, IInteractable, IPickable
+public class ConeStack : Pickable, IInteractable
 {
     [SerializeField] private GameObject conePrefab;
     private int currentCone = 5;
@@ -13,12 +13,6 @@ public class ConeStack : MonoBehaviour, IInteractable, IPickable
     public void StopHovered()
     {
 
-    }
-
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)

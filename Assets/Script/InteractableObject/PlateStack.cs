@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlateStack : Pickable, IInteractable
@@ -6,9 +7,11 @@ public class PlateStack : Pickable, IInteractable
     [SerializeField] private GameObject emptyPlatePrefab;
     [field: SerializeField] public int maxPlate {get; private set;} = 8;
     [field: SerializeField] public int currentPlate {get; private set;}
+    [SerializeField] private TextMeshProUGUI plateCountUI;
     void Awake()
     {
         currentPlate = maxPlate;
+        plateCountUI.text = currentPlate.ToString();
     }
 
     public void Hovered()
@@ -24,6 +27,7 @@ public class PlateStack : Pickable, IInteractable
     public void AddToStack()
     {
         currentPlate++;
+        plateCountUI.text = currentPlate.ToString();
     }
 
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
@@ -36,6 +40,7 @@ public class PlateStack : Pickable, IInteractable
         if (currentPlate > 0)
         {
             currentPlate--;
+            plateCountUI.text = currentPlate.ToString();
             GameObject emptyCup = Instantiate(emptyPlatePrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }

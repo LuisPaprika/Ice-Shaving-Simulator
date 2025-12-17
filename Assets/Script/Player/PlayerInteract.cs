@@ -101,10 +101,21 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent(out WaffleBatter waffleBatter) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle))
                 {
-                    if (waffleBatter.BatterLeft > 0)
+                    if (!laddle.isFull)
                     {
-                        waffleBatter.Dip(laddle);
+                        if (waffleBatter.CurrentBatter > 0)
+                        {
+                            waffleBatter.Dip(laddle);
+                        }
                     }
+                    else
+                    {
+                        if(waffleBatter.CurrentBatter < waffleBatter.MaxBatter)
+                        {
+                            waffleBatter.AddBatter(laddle);
+                        }
+                    }
+
                 }
 
                 else if (hitInfo.transform.TryGetComponent(out WaffleCast waffleCast) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Laddle laddle1))
@@ -169,6 +180,14 @@ public class PlayerInteract : MonoBehaviour
                         hitInfo.transform.GetComponent<ShavingStand>())
                     {
                         iceBlock.putInMachine(hitInfo.transform.gameObject);
+                    }
+
+                    else if (hitInfo.transform.TryGetComponent(out IceStorage iceStorage))
+                    {
+                        if (iceStorage.currentIce < iceStorage.maxIce)
+                        {
+                            iceBlock.Stack(iceStorage.gameObject);
+                        }
                     }
                 }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class CupStack : Pickable, IInteractable
@@ -8,9 +9,11 @@ public class CupStack : Pickable, IInteractable
     [SerializeField] private GameObject emptyCupPrefab;
     [field: SerializeField] public int maxCup {get; private set;} = 5;
     [field: SerializeField] public int currentCup {get; private set;}
+    [SerializeField] private TextMeshProUGUI cupTextUI;
     void Awake()
     {
         currentCup = maxCup;
+        cupTextUI.text = currentCup.ToString();
     }
 
     public void Hovered()
@@ -33,6 +36,7 @@ public class CupStack : Pickable, IInteractable
         if (currentCup > 0)
         {
             currentCup--;
+            cupTextUI.text = currentCup.ToString();
             GameObject emptyCup = Instantiate(emptyCupPrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }
@@ -42,6 +46,7 @@ public class CupStack : Pickable, IInteractable
     public void AddToStack()
     {
         currentCup++;
+        cupTextUI.text = currentCup.ToString();
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)

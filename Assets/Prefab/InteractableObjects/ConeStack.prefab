@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &488028239977202575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 7116986739702941194}
   - component: {fileID: 1027649993537132007}
   - component: {fileID: 3772318150452608840}
-  - component: {fileID: 8251936270928368230}
+  - component: {fileID: 369438968746234282}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -164,17 +164,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5027358069280471627}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.88}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00006991624}
+  m_LocalPosition: {x: 0, y: 0, z: -0.033237014}
   m_LocalScale: {x: 0.01721063, y: 0.011060105, z: 0.01721063}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 488028239977202575}
   m_Father: {fileID: 1400340936758609717}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.992, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.15, y: -0.13}
+  m_AnchoredPosition: {x: 0.14994162, y: 1.23}
   m_SizeDelta: {x: 878.7999, y: 372.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7116986739702941194
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8251936270928368230
+--- !u!114 &369438968746234282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,6 +384,7 @@ MonoBehaviour:
   conePrefab: {fileID: 2187301853058340095, guid: 537c725643e37694ab3089d1aa2781bb, type: 3}
   <maxCone>k__BackingField: 5
   <currentCone>k__BackingField: 0
+  coneCountUI: {fileID: 9016586704020587205}
 --- !u!114 &8571729171450214959
 MonoBehaviour:
   m_ObjectHideFlags: 0

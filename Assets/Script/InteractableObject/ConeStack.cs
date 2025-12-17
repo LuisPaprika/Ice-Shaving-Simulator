@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class ConeStack : Pickable, IInteractable
@@ -6,9 +8,11 @@ public class ConeStack : Pickable, IInteractable
     [SerializeField] private GameObject conePrefab;
     [field: SerializeField] public int maxCone {get; private set;} = 5;
     [field: SerializeField] public int currentCone {get; private set;}
+    [SerializeField] private TextMeshProUGUI coneCountUI;
     void Awake()
     {
         currentCone = maxCone;
+        coneCountUI.text = currentCone.ToString();
     }
     public void Hovered()
     {
@@ -28,6 +32,7 @@ public class ConeStack : Pickable, IInteractable
     public void AddToStack()
     {
         currentCone++;
+        coneCountUI.text = currentCone.ToString();
     }
 
     private void pickupCone(GameObject objectPickupPoint)
@@ -35,6 +40,7 @@ public class ConeStack : Pickable, IInteractable
         if (currentCone > 0)
         {
             currentCone--;
+            coneCountUI.text = currentCone.ToString();
             GameObject emptyCup = Instantiate(conePrefab, transform.position, Quaternion.identity, objectPickupPoint.transform);
             StartCoroutine(lerpObject(transform.position, objectPickupPoint, emptyCup.transform));
         }

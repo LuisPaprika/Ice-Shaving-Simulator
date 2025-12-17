@@ -26,12 +26,6 @@ public class PlateStack : Pickable, IInteractable
         currentPlate++;
     }
 
-    public void Pickup(GameObject objectPickupPoint)
-    {
-        StartCoroutine(lerpObject(transform.position, objectPickupPoint.gameObject, transform));
-        transform.SetParent(objectPickupPoint.transform);
-    }
-
     public void Interact(GameObject objectPickupPoint, PlayerMovement player)
     {
         pickupCup(objectPickupPoint);

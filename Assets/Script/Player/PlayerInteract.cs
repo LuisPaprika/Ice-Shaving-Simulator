@@ -27,7 +27,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Stacks"))
                 {
-                    if (hitInfo.collider.TryGetComponent(out IPickable pickable))
+                    if (hitInfo.collider.TryGetComponent(out Pickable pickable))
                         pickable.Pickup(objectPickupPoint);
                 }
             }

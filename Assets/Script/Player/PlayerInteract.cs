@@ -110,7 +110,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                     else
                     {
-                        if(waffleBatter.CurrentBatter < waffleBatter.MaxBatter)
+                        if (waffleBatter.CurrentBatter < waffleBatter.MaxBatter)
                         {
                             waffleBatter.AddBatter(laddle);
                         }
@@ -133,6 +133,20 @@ public class PlayerInteract : MonoBehaviour
                         if (plateStack.currentPlate < plateStack.maxPlate)
                         {
                             plate.Stack(plateStack.gameObject);
+                        }
+                    }
+                }
+
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out IceCreamBox iceCreamBox))
+                {
+                    if (hitInfo.transform.TryGetComponent(out IceCream iceCreamFridge))
+                    {
+                        if (iceCreamBox.iceCreamFlavor == iceCreamFridge.flavor)
+                        {
+                            if (iceCreamFridge.CurrentScoop <= iceCreamFridge.MaxScoop + iceCreamBox.scoopAmount)
+                            {
+                                iceCreamBox.AddIceCream(iceCreamFridge.gameObject);
+                            }
                         }
                     }
                 }

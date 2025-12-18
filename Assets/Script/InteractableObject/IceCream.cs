@@ -10,7 +10,7 @@ public class IceCream : MonoBehaviour, IInteractable
     [SerializeField] private float scoopTime = 0.5f;
     private bool isLooked;
     private bool interactable = true;
-    [SerializeField] private IceCreamFlavor flavor;
+    [field: SerializeField] public IceCreamFlavor flavor {get; private set;}
     [SerializeField] private TextMeshProUGUI scoopCountUI;
     [field: SerializeField] public int CurrentScoop { get; private set; }
     [field: SerializeField] public int MaxScoop { get; private set; } = 30;
@@ -51,6 +51,12 @@ public class IceCream : MonoBehaviour, IInteractable
             cone.GetComponent<Cone>().AddScoop(scoop, flavor);
         }
 
+    }
+    
+    public void AddScoop(int amount)
+    {
+        CurrentScoop += amount;
+        scoopCountUI.text = CurrentScoop.ToString();
     }
 
     private IEnumerator StartScooping(float duration, GameObject cone)

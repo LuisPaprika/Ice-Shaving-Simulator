@@ -3,20 +3,9 @@ using UnityEngine;
 
 public class CanvasDisplay : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
-
-    public void SetText(string message)
+    [SerializeField] private GameObject canvas;
+    public void EnablingCanvas(bool value)
     {
-        text.text = message;
-    }
-
-    public void DisplayText()
-    {
-        text.enabled = true;
-    }
-
-    public void HideText()
-    {
-        text.enabled = false;
+        canvas.SetActive(value);
     }
 }

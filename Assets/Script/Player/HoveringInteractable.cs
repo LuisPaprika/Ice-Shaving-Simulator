@@ -18,7 +18,7 @@ public class HoveringInteractable : MonoBehaviour
             {
                 if (tempScript)
                 {
-                    tempScript.HideText();
+                    tempScript.EnablingCanvas(false);
                 }
             }
             else if (lookedObject == hitInfo.collider.gameObject)
@@ -26,7 +26,7 @@ public class HoveringInteractable : MonoBehaviour
                 if (hitInfo.collider.gameObject.TryGetComponent(out CanvasDisplay canvasDisplay))
                 {
                     tempScript = canvasDisplay;
-                    canvasDisplay.DisplayText();
+                    canvasDisplay.EnablingCanvas(true);
                 }
             }
 
@@ -50,7 +50,7 @@ public class HoveringInteractable : MonoBehaviour
             {
                 if (tempScript)
                 {
-                    tempScript.HideText();
+                    tempScript.EnablingCanvas(false);
                 }
                 
                 lookedObject = null;

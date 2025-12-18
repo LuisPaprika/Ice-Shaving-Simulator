@@ -11,25 +11,8 @@ public class ShavedIce : Pickable, IInteractable
 
     public void AddFlavor(ShavedIceFlavor flavor)
     {
-        Debug.Log(flavor);
-        switch (flavor)
-        {
-            case ShavedIceFlavor.Strawberry:
-                Instantiate(shaveIcedAsset.getPrefab(ShavedIceFlavor.Strawberry), transform.position, Quaternion.identity);
-                Destroy(gameObject);
-                break;
-            case ShavedIceFlavor.Chocolate:
-                Instantiate(shaveIcedAsset.getPrefab(ShavedIceFlavor.Chocolate), transform.position, Quaternion.identity);
-                Destroy(gameObject);
-                break;
-            case ShavedIceFlavor.Milk:
-                Instantiate(shaveIcedAsset.getPrefab(ShavedIceFlavor.Milk), transform.position, Quaternion.identity);
-                Destroy(gameObject);
-                break;
-            
-            default:
-                break;
-        }
+        Instantiate(shaveIcedAsset.getPrefab(flavor), transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public void Give(GameObject targetPerson)

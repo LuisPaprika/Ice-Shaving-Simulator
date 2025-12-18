@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,15 @@ public class IceCream : MonoBehaviour, IInteractable
     private bool isLooked;
     private bool interactable = true;
     [SerializeField] private IceCreamFlavor flavor;
+    [SerializeField] private TextMeshProUGUI scoopCountUI;
+    [field: SerializeField] public int CurrentScoop { get; private set; }
+    [field: SerializeField] public int MaxScoop { get; private set; } = 30;
+
+    void Awake()
+    {
+        CurrentScoop = MaxScoop;
+        scoopCountUI.text = CurrentScoop.ToString();
+    }
 
     private void Update()
     {
@@ -33,8 +43,14 @@ public class IceCream : MonoBehaviour, IInteractable
 
     public void Scoop(GameObject cone)
     {
-        GameObject scoop = Instantiate(scoopPrefab, transform.position, Quaternion.identity, transform);
-        cone.GetComponent<Cone>().AddScoop(scoop, flavor);
+        if (CurrentScoop > 0)
+        {
+            CurrentScoop--;
+            scoopCountUI.text = CurrentScoop.ToString();
+            GameObject scoop = Instantiate(scoopPrefab, transform.position, Quaternion.identity, transform);
+            cone.GetComponent<Cone>().AddScoop(scoop, flavor);
+        }
+
     }
 
     private IEnumerator StartScooping(float duration, GameObject cone)
@@ -63,7 +79,7 @@ public class IceCream : MonoBehaviour, IInteractable
         progressSlider.SetActive(false);
 
     }
-    
+
     private void _Scoop(GameObject cone)
     {
         GameObject scoop = Instantiate(scoopPrefab, transform.position, Quaternion.identity, transform);

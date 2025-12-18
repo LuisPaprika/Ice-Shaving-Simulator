@@ -95,7 +95,7 @@ public class PlayerInteract : MonoBehaviour
                 {
                     if (shavedIce.flavor == ShavedIceFlavor.Blank)
                     {
-                        if(syrup.CurrentUsageLeft > 0)
+                        if (syrup.CurrentUsageLeft > 0)
                         {
                             syrup.SplashSyrup(shavedIce);
                         }
@@ -236,6 +236,12 @@ public class PlayerInteract : MonoBehaviour
         player.InputActions.Player.Disable();
     }
 
+    private void MoveObjectUp(GameObject gameObj) //Demo purpose
+    {
+        float halfHeight = gameObj.GetComponent<Renderer>().bounds.size.y / 2f;
+        gameObj.transform.position += Vector3.up * halfHeight;
+    }
+
     private IEnumerator PlaceObject(Vector3 startPostion, Vector3 targetPostion, Transform placeObj, Transform targetObj)
     {
         float currentTime = 0f;
@@ -247,6 +253,7 @@ public class PlayerInteract : MonoBehaviour
             yield return null;
         }
         placeObj.position = targetPostion;
+        MoveObjectUp(placeObj.gameObject); //Demo
     }
 
     private IEnumerator PutObjectInContainer(Vector3 startPostion, Vector3 targetPostion, Transform placeObj, Transform targetObj)
@@ -260,6 +267,7 @@ public class PlayerInteract : MonoBehaviour
             yield return null;
         }
         placeObj.position = targetPostion;
+        MoveObjectUp(placeObj.gameObject); //Demo
 
         placeObj.SetParent(targetObj);
     }

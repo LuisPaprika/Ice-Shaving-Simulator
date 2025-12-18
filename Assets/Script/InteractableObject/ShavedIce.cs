@@ -11,6 +11,7 @@ public class ShavedIce : Pickable, IInteractable
 
     public void AddFlavor(ShavedIceFlavor flavor)
     {
+        Debug.Log(flavor);
         switch (flavor)
         {
             case ShavedIceFlavor.Strawberry:

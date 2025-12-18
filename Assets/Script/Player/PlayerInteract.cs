@@ -93,9 +93,12 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hitInfo.transform.TryGetComponent(out ShavedIce shavedIce) && objectPickupPoint.transform.GetChild(0).TryGetComponent(out Syrup syrup))
                 {
-                    if (hitInfo.transform.gameObject.tag == "Unflavored")
+                    if (shavedIce.flavor == ShavedIceFlavor.Blank)
                     {
-                        shavedIce.AddFlavor(syrup.getFlavor());
+                        if(syrup.CurrentUsageLeft > 0)
+                        {
+                            syrup.SplashSyrup(shavedIce);
+                        }
                     }
                 }
 

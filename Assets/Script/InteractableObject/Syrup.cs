@@ -1,12 +1,21 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Syrup : Pickable, IInteractable
 {
     [SerializeField] private string interactPrompt;
-    [SerializeField] private ShavedIceFlavor flavor;
+    [field: SerializeField] public ShavedIceFlavor flavor { get; private set; }
+    [field: SerializeField] public int CurrentUsageLeft { get; private set; }
+    [field: SerializeField] public int MaxUsage { get; private set; } = 10;
+    [SerializeField] private TextMeshProUGUI usageCountUI;
 
+    void Awake()
+    {
+        CurrentUsageLeft = MaxUsage;
+        usageCountUI.text = CurrentUsageLeft.ToString();
+    }
     public void Interact(GameObject transform, PlayerMovement player)
     {
 
@@ -15,15 +24,22 @@ public class Syrup : Pickable, IInteractable
     {
 
     }
-    
+
     public void StopHovered()
     {
 
     }
 
-    public ShavedIceFlavor getFlavor()
+    public void SplashSyrup(ShavedIce shavedIce)
     {
-        return flavor;
+        CurrentUsageLeft--;
+        usageCountUI.text = CurrentUsageLeft.ToString();
+        shavedIce.AddFlavor(flavor);
+
+        if(CurrentUsageLeft <= 0)
+        {
+            Destroy(this);
+        }
     }
 
     private IEnumerator lerpObject(Vector3 startPostion, GameObject targetPostion, Transform obj)

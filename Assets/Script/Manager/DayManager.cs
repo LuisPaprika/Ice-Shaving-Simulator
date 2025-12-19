@@ -5,7 +5,7 @@ public class DayManager : MonoBehaviour
 {
     [field: SerializeField] public static int Day { get; private set; }
     [field: SerializeField] public static DayManager Instance { get; private set; }
-    public static event Action<int> onDaySet;
+    public static event Action onDaySet;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class DayManager : MonoBehaviour
     {
         IncomeManager.Instance.ResetSalesCount();
         Day = amount;
-        onDaySet?.Invoke(Day);
+        CustomerSpawner.Instance.SetCustomerLimit(Day);
         UIManager.Instance.SetDayText(Day.ToString());
     }
 
@@ -38,7 +38,7 @@ public class DayManager : MonoBehaviour
 
         IncomeManager.Instance.ResetSalesCount();
         Day++;
-        onDaySet?.Invoke(Day);
+        CustomerSpawner.Instance.SetCustomerLimit(Day);
         UIManager.Instance.SetDayText(Day.ToString());
     }
 }

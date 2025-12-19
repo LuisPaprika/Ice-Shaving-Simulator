@@ -11,16 +11,25 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private int baseCustomerLimit;
     [SerializeField] private float customerLimitGrowth;
+    [field: SerializeField] public static CustomerSpawner Instance {get; private set;}
     private bool allowSpawning;
     private int spawnedCustomer;
     private int customerLimitPerDay;
 
     void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(this);
+        }
+
+
         OpeningSign.onOpenStore += StartSpawning;
         OpeningSign.onCloseStore += StopSpawning;
-
-        DayManager.onDaySet += SetCustomerLimit;
 
         QueueManager.SetPositions(positions);
     }
@@ -36,7 +45,7 @@ public class CustomerSpawner : MonoBehaviour
         allowSpawning = false;
     }
 
-    private void SetCustomerLimit(int day)
+    public void SetCustomerLimit(int day)
     {
         customerLimitPerDay = Mathf.RoundToInt(baseCustomerLimit + (customerLimitGrowth * MathF.Log(day + 1)));
         spawnedCustomer = 0;

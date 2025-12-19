@@ -1,5 +1,5 @@
+using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProductPanel : MonoBehaviour
@@ -8,6 +8,8 @@ public class ProductPanel : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI amountUI;
     [SerializeField] private TextMeshProUGUI nameUI;
+    public static event Action<ProductSO> onIncreaseProductAmount;
+    public static event Action<ProductSO> onDecreaseProductAmount;
     private int amount = 0;
 
     void Awake()
@@ -15,12 +17,13 @@ public class ProductPanel : MonoBehaviour
         nameUI.text = productSO.productName;
 
         DayManager.onDaySet += ResetAmount;
+        ShopManager.onPurchase += ResetAmount;
     }
     public void addAmount()
     {
         amount++;
         amountUI.text = amount.ToString();
-        ShopManager.Instance.UpdatePrice(productSO.price);
+        onIncreaseProductAmount?.Invoke(productSO);
     }
 
     public void removeAmount()
@@ -29,13 +32,14 @@ public class ProductPanel : MonoBehaviour
         {
             amount--;
             amountUI.text = amount.ToString();
-            ShopManager.Instance.UpdatePrice(-1 * productSO.price);
+            onDecreaseProductAmount?.Invoke(productSO);
         }
     }
 
-    private void ResetAmount(int temp)
+    private void ResetAmount()
     {
         amount = 0;
+        amountUI.text = amount.ToString();
     }
 
 }

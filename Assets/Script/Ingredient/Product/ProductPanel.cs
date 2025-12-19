@@ -8,25 +8,34 @@ public class ProductPanel : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI amountUI;
     [SerializeField] private TextMeshProUGUI nameUI;
+    private int amount = 0;
 
     void Awake()
     {
         nameUI.text = productSO.productName;
+
+        DayManager.onDaySet += ResetAmount;
     }
     public void addAmount()
     {
-        productSO.amount++;
-        amountUI.text = productSO.amount.ToString();
+        amount++;
+        amountUI.text = amount.ToString();
         ShopManager.Instance.UpdatePrice(productSO.price);
     }
 
     public void removeAmount()
     {
-        if(productSO.amount > 0)
+        if(amount > 0)
         {
-            productSO.amount--;
-            amountUI.text = productSO.amount.ToString();
+            amount--;
+            amountUI.text = amount.ToString();
             ShopManager.Instance.UpdatePrice(-1 * productSO.price);
         }
     }
+
+    private void ResetAmount(int temp)
+    {
+        amount = 0;
+    }
+
 }

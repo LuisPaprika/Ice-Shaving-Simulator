@@ -7,7 +7,7 @@ public class ShopManager : MonoBehaviour
     [field: SerializeField] public static ShopManager Instance { get; private set; }
     [field: SerializeField] public int Price { get; private set; } = 0;
     [SerializeField] private TextMeshProUGUI priceUI;
-    private ScriptableObject[] boughtProducts;
+    private ProductSO[] boughtProducts;
 
 
     void Awake()
@@ -32,11 +32,12 @@ public class ShopManager : MonoBehaviour
     {
         if(WalletManager.Money >= Price)
         {
-            
+            Debug.Log("Buy");
         }
 
         else
         {
+            Debug.Log("Not Enough");
             UIManager.Instance.ShowAnouncingText("I don't have enough money");
         }
     }

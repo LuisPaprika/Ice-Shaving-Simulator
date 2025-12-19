@@ -4,7 +4,6 @@ using UnityEngine;
 public class ProductSO : ScriptableObject
 {
     public string productName;
-    public int amount;
     public int price;
     public GameObject prefab;
 }

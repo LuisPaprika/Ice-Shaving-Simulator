@@ -246,7 +246,7 @@ MonoBehaviour:
   progressSlider: {fileID: 0}
   scoopPrefab: {fileID: 7875670995973318144, guid: 8c582ff29cd9aa24083a24f44a84f1fe, type: 3}
   scoopTime: 0.5
-  <flavor>k__BackingField: 0
+  <flavor>k__BackingField: 1
   scoopCountUI: {fileID: 5131355936402439563}
   <CurrentScoop>k__BackingField: 0
   <MaxScoop>k__BackingField: 30

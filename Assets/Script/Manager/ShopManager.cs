@@ -43,6 +43,8 @@ public class ShopManager : MonoBehaviour
             WalletManager.SetMoney(WalletManager.Money - Price);
             cart.Clear();
             onPurchase?.Invoke();
+            Price = 0;
+            priceUI.text = Price.ToString();
         }
 
         else

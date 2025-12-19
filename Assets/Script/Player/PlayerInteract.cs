@@ -129,16 +129,6 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
-                {
-                    if (hitInfo.transform.TryGetComponent(out PlateStack plateStack))
-                    {
-                        if (plateStack.currentPlate < plateStack.maxPlate)
-                        {
-                            plate.Stack(plateStack.gameObject);
-                        }
-                    }
-                }
 
                 else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out IceCreamBox iceCreamBox))
                 {
@@ -169,6 +159,17 @@ public class PlayerInteract : MonoBehaviour
                         else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate1))
                         {
                             plate1.Give(hitInfo.transform.gameObject);
+                        }
+                    }
+                }
+
+                else if (objectPickupPoint.transform.GetChild(0).TryGetComponent(out Plate plate))
+                {
+                    if (hitInfo.transform.TryGetComponent(out PlateStack plateStack))
+                    {
+                        if (plateStack.currentPlate < plateStack.maxPlate)
+                        {
+                            plate.Stack(plateStack.gameObject);
                         }
                     }
                 }

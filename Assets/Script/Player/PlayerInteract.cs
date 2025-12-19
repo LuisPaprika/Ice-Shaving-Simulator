@@ -238,8 +238,12 @@ public class PlayerInteract : MonoBehaviour
 
     private void MoveObjectUp(GameObject gameObj) //Demo purpose
     {
-        float halfHeight = gameObj.GetComponent<Renderer>().bounds.size.y / 2f;
-        gameObj.transform.position += Vector3.up * halfHeight;
+        if (gameObj.GetComponent<Renderer>())
+        {
+            float halfHeight = gameObj.GetComponent<Renderer>().bounds.size.y / 2f;
+            gameObj.transform.position += Vector3.up * halfHeight;
+        }
+
     }
 
     private IEnumerator PlaceObject(Vector3 startPostion, Vector3 targetPostion, Transform placeObj, Transform targetObj)

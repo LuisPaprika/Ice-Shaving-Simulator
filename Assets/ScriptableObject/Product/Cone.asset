@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd0267013925b04ebaf64070d96b772, type: 3}
+  m_Name: Cone
+  m_EditorClassIdentifier: Assembly-CSharp::ProductSO
+  productName: Cones Pack
+  amount: 0
+  price: 50
+  prefab: {fileID: 5446260891457855013, guid: 364c15c32ced91944abda058df93a701, type: 3}

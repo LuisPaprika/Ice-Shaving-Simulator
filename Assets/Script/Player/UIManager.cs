@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject salesPanel;
     [SerializeField] private TextMeshProUGUI salesMenuPrefab;
     [SerializeField] private Image crosshair;
+    [SerializeField] private GameObject shoppingPanel;
     void Awake()
     {
         if (Instance == null)
@@ -92,5 +94,11 @@ public class UIManager : MonoBehaviour
         }
 
         salesPanel.SetActive(false);
+    }
+
+    public void ToggleShoppingUI()
+    {
+        shoppingPanel.SetActive(!shoppingPanel.activeSelf);
+        salesPanel.SetActive(!salesPanel.activeSelf);
     }
 }

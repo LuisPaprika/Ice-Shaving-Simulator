@@ -49,7 +49,7 @@ public class ShopManager : MonoBehaviour
 
     public void RemoveBoughtProduct(string targetName)
     {
-        if()
+
     }
 
 }

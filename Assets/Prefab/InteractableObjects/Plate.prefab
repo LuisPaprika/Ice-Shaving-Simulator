@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4437627007220823512}
   - component: {fileID: 6977866187199977048}
   - component: {fileID: 2573096691506263317}
-  - component: {fileID: 8780589624096112354}
   m_Layer: 6
   m_Name: Plate
   m_TagString: Container
@@ -127,16 +126,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8780589624096112354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943868668966478818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b8e0f39baabee240add3d077caecd6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CanvasDisplay
-  canvas: {fileID: 0}

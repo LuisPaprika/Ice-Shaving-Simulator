@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class ShopManager : MonoBehaviour
     [field: SerializeField] public static ShopManager Instance { get; private set; }
     [field: SerializeField] public int Price { get; private set; } = 0;
     [SerializeField] private TextMeshProUGUI priceUI;
-    private ProductSO[] boughtProducts;
+    private Dictionary<ProductSO, int> boughtProducts;
 
 
     void Awake()
@@ -32,12 +33,11 @@ public class ShopManager : MonoBehaviour
     {
         if(WalletManager.Money >= Price)
         {
-            Debug.Log("Buy");
+            
         }
 
         else
         {
-            Debug.Log("Not Enough");
             UIManager.Instance.ShowAnouncingText("I don't have enough money");
         }
     }
@@ -45,6 +45,11 @@ public class ShopManager : MonoBehaviour
     public void DisablePanel()
     {
         gameObject.SetActive(false);
+    }
+
+    public void RemoveBoughtProduct(string targetName)
+    {
+        if()
     }
 
 }

@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class WalletManager : MonoBehaviour
 {
-    [field: SerializeField] public static float Money { get; private set; }
+    [field: SerializeField] public static WalletManager Instance { get; private set; }
+    [field: SerializeField] public float Money { get; private set; }
 
-    public static void SetMoney(float amount)
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(this);
+        }
+    }
+    public void SetMoney(float amount)
     {
         Money = amount;
         UIManager.Instance.SetMoneyText(Money.ToString());

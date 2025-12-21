@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI salesMenuPrefab;
     [SerializeField] private Image crosshair;
     [SerializeField] private GameObject shoppingPanel;
+    [SerializeField] private TextMeshProUGUI cartPriceText;
     void Awake()
     {
         if (Instance == null)
@@ -100,5 +101,10 @@ public class UIManager : MonoBehaviour
     {
         shoppingPanel.SetActive(!shoppingPanel.activeSelf);
         salesPanel.SetActive(!salesPanel.activeSelf);
+    }
+
+    public void SetPriceText(string message)
+    {
+        cartPriceText.text = message;
     }
 }

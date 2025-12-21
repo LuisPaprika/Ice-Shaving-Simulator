@@ -4,5 +4,5 @@ public interface IInteractable
 {
     void StopHovered();
     void Hovered();
-    void Interact(GameObject transform, PlayerMovement player);
+    void Interact(GameObject objectPickupPoint, PlayerMovement player);
 }

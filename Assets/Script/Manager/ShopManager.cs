@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
     [field: SerializeField] public static ShopManager Instance { get; private set; }
     [field: SerializeField] public int Price { get; private set; } = 0;
-    [SerializeField] private TextMeshProUGUI priceUI;
     public static event Action onPurchase;
     [field: SerializeField] public List<Order> cart { get; private set; } = new List<Order>();
-
+    [SerializeField] private ProductBox spawnBox;
 
     void Awake()
     {
@@ -33,18 +33,23 @@ public class ShopManager : MonoBehaviour
     private void UpdatePrice(int amount)
     {
         Price += amount;
-        priceUI.text = Price.ToString();
+        UIManager.Instance.SetPriceText(Price.ToString());
     }
 
     public void Purchase()
     {
-        if (WalletManager.Money >= Price)
+        if (WalletManager.Instance.Money >= Price)
         {
-            WalletManager.SetMoney(WalletManager.Money - Price);
+            foreach(Order order in cart)
+            {
+                spawnBox.AddProducts(order);
+            }
+
+            WalletManager.Instance.SetMoney(WalletManager.Instance.Money - Price);
             cart.Clear();
             onPurchase?.Invoke();
             Price = 0;
-            priceUI.text = Price.ToString();
+            UIManager.Instance.SetPriceText(Price.ToString());
         }
 
         else

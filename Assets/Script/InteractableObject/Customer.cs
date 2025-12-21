@@ -30,7 +30,7 @@ public class Customer : MonoBehaviour
             {
                 Interactable = false;
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
-                WalletManager.SetMoney(WalletManager.Money + ShavedIcePrice);
+                WalletManager.Instance.SetMoney(WalletManager.Instance.Money + ShavedIcePrice);
                 IncomeManager.Instance.AddSalesCount("Shaved Ice", 1);
                 Exit();
             }
@@ -50,12 +50,12 @@ public class Customer : MonoBehaviour
 
                 if (request.GetComponent<Cone>().currentScoop > 1)
                 {
-                    WalletManager.SetMoney(WalletManager.Money + NapoleanIceCreamPrice);
+                    WalletManager.Instance.SetMoney(WalletManager.Instance.Money + NapoleanIceCreamPrice);
                     IncomeManager.Instance.AddSalesCount("Napolean Ice Cream", 1);
                 }
                 else if (request.GetComponent<Cone>().currentScoop < 1)
                 {
-                    WalletManager.SetMoney(WalletManager.Money + SingleIceCreamPrice);
+                    WalletManager.Instance.SetMoney(WalletManager.Instance.Money + SingleIceCreamPrice);
                     IncomeManager.Instance.AddSalesCount("Single Scoop Ice Cream", 1);
                 }
 
@@ -77,12 +77,12 @@ public class Customer : MonoBehaviour
 
                 if (request.GetComponent<Plate>().transform.childCount > 1)
                 {
-                    WalletManager.SetMoney(WalletManager.Money + DoubleWafflePrice);
+                    WalletManager.Instance.SetMoney(WalletManager.Instance.Money + DoubleWafflePrice);
                     IncomeManager.Instance.AddSalesCount("Double Waffle", 1);
                 }
                 else if (request.GetComponent<Plate>().transform.childCount == 1)
                 {
-                    WalletManager.SetMoney(WalletManager.Money + SingleWafflePrice);
+                    WalletManager.Instance.SetMoney(WalletManager.Instance.Money + SingleWafflePrice);
                     IncomeManager.Instance.AddSalesCount("Single Waffle", 1);
                 }
 

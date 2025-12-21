@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class WaffleBatter : MonoBehaviour, IInteractable
+public class WaffleBatter : Pickable, IInteractable
 {
     [field: SerializeField] public int CurrentBatter { get; private set; }
     [field: SerializeField] public int MaxBatter { get; private set; } = 5;

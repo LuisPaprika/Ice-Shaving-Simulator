@@ -48,7 +48,7 @@ public class Customer : MonoBehaviour
                 Interactable = false;
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
 
-                if (request.GetComponent<Cone>().currentScoop > 1)
+                if (request.GetComponent<Cone>().currentScoop >= 1)
                 {
                     WalletManager.Instance.SetMoney(WalletManager.Instance.Money + NapoleanIceCreamPrice);
                     IncomeManager.Instance.AddSalesCount("Napolean Ice Cream", 1);

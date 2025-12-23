@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
                 if(menuSO.sales > 0)
                 {
                     TextMeshProUGUI text = Instantiate(salesMenuPrefab, salesPanel.transform.GetChild(0).transform);
-                    text.text = menuSO.name + "        " + "x" + menuSO.sales + "        = " + menuSO.sales*menuSO.price;
+                    text.text = menuSO.menuName + "        " + "x" + menuSO.sales + "        = " + menuSO.sales*menuSO.price;
                 }
             }
         }

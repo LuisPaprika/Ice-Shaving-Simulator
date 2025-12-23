@@ -4330,7 +4330,7 @@ GameObject:
   - component: {fileID: 1770551633}
   - component: {fileID: 1770551632}
   - component: {fileID: 1770551638}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5703,7 +5703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e08cd5d6d7f378459e7b3ce733a6fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Money>k__BackingField: 1000
+  <Money>k__BackingField: 0
 --- !u!224 &1852228836
 RectTransform:
   m_ObjectHideFlags: 0

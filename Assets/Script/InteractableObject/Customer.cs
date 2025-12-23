@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Customer : MonoBehaviour
 {
     [field: SerializeField] public bool Interactable;
+    private bool isLeaving;
     private float waitingTime;
     public GameObject request;
     [SerializeField] private GameObject timeSlider;
@@ -32,13 +33,11 @@ public class Customer : MonoBehaviour
                 Instantiate(correctParticle, transform.position, Quaternion.identity);
                 WalletManager.Instance.SetMoney(WalletManager.Instance.Money + ShavedIcePrice);
                 IncomeManager.Instance.AddSalesCount("Shaved Ice", 1);
-                Exit();
             }
             else
             {
                 Interactable = false;
                 Instantiate(wrongParticle, transform.position, Quaternion.identity);
-                Exit();
             }
         }
         else if (request.GetComponent<Cone>())
@@ -59,13 +58,11 @@ public class Customer : MonoBehaviour
                     IncomeManager.Instance.AddSalesCount("Single Scoop Ice Cream", 1);
                 }
 
-                Exit();
             }
             else
             {
                 Interactable = false;
                 Instantiate(wrongParticle, transform.position, Quaternion.identity);
-                Exit();
             }
         }
         else if (request.GetComponent<Plate>())
@@ -87,14 +84,21 @@ public class Customer : MonoBehaviour
                 }
 
 
-                Exit();
             }
             else
             {
                 Interactable = false;
                 Instantiate(wrongParticle, transform.position, Quaternion.identity);
-                Exit();
+                if (!isLeaving)
+                {
+                    Exit();
+                }
             }
+        }
+
+        if (!isLeaving)
+        {
+            Exit();
         }
     }
 
@@ -131,16 +135,20 @@ public class Customer : MonoBehaviour
 
         Interactable = false;
 
-        Instantiate(wrongParticle, transform.position, Quaternion.identity);
-        Exit();
+        if (!isLeaving)
+        {
+            Instantiate(wrongParticle, transform.position, Quaternion.identity);
+            Exit();
+        }
     }
     private void Exit()
     {
-        QueueManager.MoveQueue();
-
+        isLeaving = true;
         transform.GetChild(0).gameObject.SetActive(false);
         timeSlider.SetActive(false);
         timeSlider.GetComponent<Slider>().value = 0f;
+
+        QueueManager.MoveQueue();
     }
 
 }

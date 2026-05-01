@@ -44,6 +44,11 @@ Note: Orders may require one or two waffles (order visuals are work in progress)
 
 ## ▶️ How to Run
 
+- Download build from Releases
+- Run .exe
+
+or
+
 - Open project in Unity  
 - Load scene: MainScene  
 - Press Play  

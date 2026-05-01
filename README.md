@@ -55,20 +55,9 @@ or
 
 ---
 
-## 📸 Screenshots
+## 📸 Gameplay
 
-<img width="1564" height="873" alt="image" src="https://github.com/user-attachments/assets/ddad9d51-19b9-431a-835a-19f879bb4a23" />
-
-<img width="1560" height="867" alt="image" src="https://github.com/user-attachments/assets/f476bea5-f399-4353-a97f-bb128cf845db" />
-
-<img width="1557" height="864" alt="image" src="https://github.com/user-attachments/assets/b8705f45-2494-4791-ae56-0c0db45611de" />
-
-<img width="1562" height="866" alt="image" src="https://github.com/user-attachments/assets/4c193a68-8c5d-48f1-ae1c-cbb11ca8d927" />
-
-<img width="1566" height="880" alt="image" src="https://github.com/user-attachments/assets/1f28fb32-5cb5-4c2f-8ce8-771fc502f980" />
-
-<img width="1564" height="867" alt="image" src="https://github.com/user-attachments/assets/24044de1-65a6-49d1-9b63-5418672a1bc0" />
-
-<img width="1559" height="867" alt="image" src="https://github.com/user-attachments/assets/de97b1d8-fb1c-4c4f-a59e-157f002969b5" />
-
-<img width="1566" height="869" alt="image" src="https://github.com/user-attachments/assets/27d5de80-8675-4b68-90b1-01181dfa97ce" />
+<img width="800" height="450" alt="IceShaving" src="https://github.com/user-attachments/assets/631e14da-10c9-4356-b0f8-5c47478627c1" />
+<img width="800" height="450" alt="IceCream" src="https://github.com/user-attachments/assets/cecbfbd1-ba07-4af8-b636-2d358f4ea175" />
+<img width="800" height="450" alt="Waffle" src="https://github.com/user-attachments/assets/074c7f9d-e9eb-4cd4-8323-dc3dba73cd50" />
+<img width="800" height="450" alt="Customer" src="https://github.com/user-attachments/assets/664248df-a7c3-4ad4-85de-ae657a77c7e0" />
